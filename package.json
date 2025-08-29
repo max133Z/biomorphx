@@ -11,8 +11,8 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.0.0",
     "@medusajs/medusa-js": "^6.1.10",
-    "@tanstack/react-query": "^5.85.5",
-    "@tanstack/react-query-devtools": "^5.85.5",
+    "@tanstack/react-query": "^4.36.1",
+    "@tanstack/react-query-devtools": "^4.36.1",
     "medusa-react": "^9.0.18",
     "next": "14.2.5",
     "react": "18.3.1",
