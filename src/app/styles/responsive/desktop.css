@@ -1,0 +1,171 @@
+/* ===== ДЕСКТОПНЫЕ СТИЛИ (≤1200px) ===== */
+
+@media (max-width: 1200px) {
+    /* Главная страница */
+    .hero-content, .featured-container, .science-content {
+        gap: 50px;
+    }
+    
+    .hero h1, .page-hero h1 {
+        font-size: 48px;
+    }
+
+    /* Админ панель */
+    .admin-container {
+        gap: 1rem;
+    }
+    
+    .admin-main {
+        padding: 1.5rem;
+    }
+    
+    .admin-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .admin-products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+}
+
+/* Дополнительные стили для маленьких экранов */
+
+@media (max-width: 576px) {
+    .hero, .page-hero {
+        padding: 100px 0 60px;
+    }
+    
+    .page-hero {
+        padding: 150px 0 60px;
+    }
+    
+    .hero h1, .page-hero h1 {
+        font-size: 32px;
+        font-family: 'Montserrat Alternates', sans-serif;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .section-title h2 {
+        font-size: 28px;
+        font-family: 'Montserrat Alternates', sans-serif;
+    }
+    
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Админ панель для маленьких экранов */
+    .admin-main {
+        padding: 0.75rem;
+        margin-top: 0.25rem;
+    }
+    
+    .admin-header {
+        padding: 0.75rem;
+    }
+    
+    .admin-header h1 {
+        font-size: 1.25rem;
+    }
+    
+    .admin-nav-item {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+    }
+    
+    .admin-nav-item i {
+        margin-right: 0.25rem;
+    }
+    
+    .stat-card {
+        padding: 0.75rem;
+    }
+    
+    .stat-number {
+        font-size: 1.25rem;
+    }
+    
+    .action-card {
+        padding: 0.75rem;
+    }
+    
+    .admin-product-card {
+        padding: 0.5rem;
+    }
+    
+    .admin-product-image {
+        height: 80px;
+    }
+    
+    .admin-product-info h3 {
+        font-size: 0.9rem;
+    }
+    
+    .admin-product-subtitle {
+        font-size: 0.8rem;
+    }
+    
+    .admin-product-actions {
+        padding: 0.5rem;
+    }
+    
+    .admin-edit-btn, .admin-delete-btn {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+    
+    .admin-form {
+        padding: 0.75rem;
+    }
+    
+    .form-section {
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+    }
+    
+    .form-section h3 {
+        font-size: 1rem;
+    }
+    
+    .form-group label {
+        font-size: 0.8rem;
+    }
+    
+    .form-group input, .form-group textarea {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .admin-login-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .admin-login-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .admin-login-header h2 {
+        font-size: 0.9rem;
+    }
+    
+    .admin-login-form {
+        gap: 0.75rem;
+    }
+    
+    .form-group input {
+        padding: 0.4rem;
+        font-size: 0.8rem;
+    }
+    
+    .admin-login-btn {
+        padding: 0.6rem;
+        font-size: 0.8rem;
+    }
+}
+

@@ -1,5 +1,5 @@
 const config = {
-  plugins: ["@tailwindcss/postcss"],
+  plugins: [], // Удаляем плагин Tailwind CSS
 };
 
 export default config;
