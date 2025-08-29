@@ -3,7 +3,7 @@ import { Kelly_Slab, Prosto_One } from "next/font/google";
 import "./globals.css";
 import HeadStyles from "./components/HeadStyles";
 import CartWrapper from "../components/CartWrapper";
-import MedusaProvider from "../contexts/MedusaProvider";
+// import MedusaProvider from "../contexts/MedusaProvider";
 
 // Импорты компонентов
 import "./styles/components/header.css";
@@ -76,11 +76,11 @@ export default function RootLayout({
       </head>
       <body className={`${kellySlab.variable} ${prostoOne.variable}`}> {/* Применяем переменные шрифтов */}
         <HeadStyles />
-        <MedusaProvider>
+        {/* <MedusaProvider> */}
           <CartWrapper>
             {children}
           </CartWrapper>
-        </MedusaProvider>
+        {/* </MedusaProvider> */}
       </body>
     </html>
   );
