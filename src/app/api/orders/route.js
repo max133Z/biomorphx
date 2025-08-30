@@ -43,8 +43,8 @@ export async function POST(request) {
       }
 
       const [orderResult] = await conn.query(
-        `INSERT INTO orders (customer_email, customer_name, customer_phone, shipping_address, total_price, status, email_sent)
-         VALUES (?, ?, ?, ?, ?, 'pending', FALSE)`,
+        `INSERT INTO orders (customer_email, customer_name, customer_phone, shipping_address, total_price, status)
+         VALUES (?, ?, ?, ?, ?, 'pending')`,
         [
           customer.email,
           `${customer.firstName || ''} ${customer.lastName || ''}`.trim() || null,
@@ -84,12 +84,6 @@ export async function POST(request) {
             subject: `Новый заказ #${orderId}`,
             html,
           });
-
-          // Отмечаем, что email отправлен
-          await conn.query(
-            `UPDATE orders SET email_sent = TRUE WHERE id = ?`,
-            [orderId]
-          );
         } catch (emailError) {
           console.error('Ошибка отправки email:', emailError);
           // Не прерываем создание заказа из-за ошибки email

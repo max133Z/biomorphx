@@ -63,6 +63,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru"> {/* Устанавливаем язык на русский */}
+      <head>
+        <link rel="preload" href="/img/L-Threonine.png" as="image" />
+        <link rel="preload" href="/img/L-Proline.png" as="image" />
+        <link rel="preload" href="/img/L-Phenilalanine.png" as="image" />
+        <link rel="preload" href="/img/L-valine.png" as="image" />
+        <link rel="preload" href="/img/L-Leucine.png" as="image" />
+        <link rel="preload" href="/img/L-Isoleucine.png" as="image" />
+        <link rel="preload" href="/img/L-Cysteine.png" as="image" />
+        <link rel="preload" href="/img/Calcium-D-Gluconate.png" as="image" />
+        <link rel="preload" href="/img/Postassium Citrate.png" as="image" />
+        <link rel="preload" href="/img/Zinc.png" as="image" />
+        <link rel="preload" href="/img/Sodium Alginate.png" as="image" />
+      </head>
       <body className={`${kellySlab.variable} ${prostoOne.variable}`}> {/* Применяем переменные шрифтов */}
         <ExternalResources />
         {/* <MedusaProvider> */}

@@ -1,5 +1,7 @@
 "use client";
 
+import OptimizedImage from './OptimizedImage';
+
 // router не нужен для карточки, действие делегируем через handleAddToCart
 
 const ProductCard = ({ product, handleAddToCart, showDescription = false }) => {
@@ -41,7 +43,7 @@ const ProductCard = ({ product, handleAddToCart, showDescription = false }) => {
       </div>
       
       <div className="product-image">
-        <img 
+        <OptimizedImage 
           src={product.image} 
           alt={product.name}
           style={{ 
@@ -49,10 +51,7 @@ const ProductCard = ({ product, handleAddToCart, showDescription = false }) => {
             maxHeight: '100%', 
             objectFit: 'contain' 
           }}
-          onError={(e) => {
-            console.error('Ошибка загрузки изображения:', product.image);
-            e.target.style.display = 'none';
-          }}
+          fallbackIcon={getProductIcon(product.name)}
         />
       </div>
       <div className="product-info">

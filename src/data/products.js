@@ -322,7 +322,7 @@ const products = [
     "recommendedDose": "Взрослым по 1-2 таблетки в день во время еды. Для лучшего усвоения рекомендуется сочетать с приемом Витамина D.",
     "price": 550,
     "quantity": "300 мг | 60 таблеток",
-    "image": "/img/Сalcium D-Gluconate.png",
+    "image": "/img/Calcium-D-Gluconate.png",
     "badge": null,
     "isTopProduct": false,
     "isMainTop": false,

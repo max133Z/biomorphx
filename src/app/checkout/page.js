@@ -84,21 +84,9 @@ const CheckoutPage = () => {
       return;
     }
 
-    if (isSubmitting) {
-      return; // Предотвращаем повторную отправку
-    }
-
     setIsSubmitting(true);
 
     try {
-      // Создаем хеш заказа для предотвращения дублирования
-      const orderHash = btoa(JSON.stringify({
-        email: formData.email,
-        items: items.map(item => ({ id: item.id, quantity: item.quantity })),
-        total: getTotalPrice(),
-        timestamp: Date.now()
-      }));
-
       const orderData = {
         customer: {
           firstName: formData.firstName,
@@ -115,8 +103,7 @@ const CheckoutPage = () => {
           quantity: item.quantity,
           unitPrice: item.price
         })),
-        total: getTotalPrice(),
-        orderHash
+        total: getTotalPrice()
       };
 
       const response = await fetch('/api/orders', {
@@ -127,24 +114,16 @@ const CheckoutPage = () => {
         body: JSON.stringify(orderData)
       });
 
-      const result = await response.json();
-
       if (response.ok) {
+        const result = await response.json();
         clearCart();
         setOrderSuccess(true);
-      } else if (response.status === 409) {
-        // Заказ уже был создан
-        alert('Похожий заказ уже был создан недавно. Если вы хотите оформить новый заказ, подождите 2 минуты или измените состав корзины.');
-        if (result.orderId) {
-          clearCart();
-          setOrderSuccess(true);
-        }
       } else {
-        throw new Error(result.error || 'Ошибка при отправке заказа');
+        throw new Error('Ошибка при отправке заказа');
       }
     } catch (error) {
       console.error('Ошибка заказа:', error);
-      alert(error.message || 'Произошла ошибка при оформлении заказа. Попробуйте еще раз.');
+      alert('Произошла ошибка при оформлении заказа. Попробуйте еще раз.');
     } finally {
       setIsSubmitting(false);
     }

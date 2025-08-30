@@ -282,6 +282,10 @@
     .product-image img {
         max-height: 160px;
         max-width: 160px;
+        /* Дополнительные оптимизации для мобильных */
+        will-change: transform;
+        backface-visibility: hidden;
+        transform: translateZ(0);
     }
     
     .product-title {
@@ -302,5 +306,10 @@
     .btn-buy svg {
         width: 14px;
         height: 14px;
+    }
+    
+    /* Fallback иконка для мобильных */
+    .product-fallback-icon {
+        font-size: 1.5rem !important;
     }
 }
