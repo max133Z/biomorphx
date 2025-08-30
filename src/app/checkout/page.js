@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCart } from '../../contexts/CartContext';
 import products from '../../data/products';
 import Header from '../../components/Header';
@@ -32,6 +32,16 @@ const CheckoutPage = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderSuccess, setOrderSuccess] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null; // избегаем hydration mismatch из-за клиентских данных корзины
+  }
 
   // Получаем информацию о товаре
   const getProductInfo = (productId) => {
@@ -61,14 +71,8 @@ const CheckoutPage = () => {
   // Обработка отправки заказа
   const handleSubmitOrder = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    // Имитация отправки заказа
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setOrderSuccess(true);
-      clearCart(); // Очищаем корзину после успешного заказа
-    }, 2000);
+    // Показываем информационное окно вместо реальной отправки
+    setShowContactModal(true);
   };
 
   // Если корзина пуста, перенаправляем на главную
@@ -474,17 +478,9 @@ const CheckoutPage = () => {
                   type="submit"
                   form="checkout-form"
                   className="submit-order-btn"
-                  disabled={isSubmitting}
+                  onClick={(e) => { e.preventDefault(); setShowContactModal(true); }}
                 >
-                  {isSubmitting ? (
-                    <>
-                      <i className="fas fa-spinner fa-spin"></i> Оформление заказа...
-                    </>
-                  ) : (
-                    <>
-                      <i className="fas fa-check"></i> Оформить заказ
-                    </>
-                  )}
+                  <i className="fas fa-check"></i> Оформить заказ
                 </button>
                 
                 <Link href="/products" className="back-to-cart-btn">
@@ -497,6 +493,22 @@ const CheckoutPage = () => {
       </section>
       
       <Footer />
+      {showContactModal && (
+        <div className="purchase-modal-overlay" onClick={() => setShowContactModal(false)}>
+          <div className="purchase-modal" onClick={(e) => e.stopPropagation()}>
+            <button className="purchase-modal-close" aria-label="Закрыть" onClick={() => setShowContactModal(false)}>
+              <i className="fas fa-times"></i>
+            </button>
+            <div className="purchase-modal-header">
+              <h3 className="purchase-modal-title">Спасибо!</h3>
+              <p className="purchase-modal-subtitle">Мы с вами свяжемся для дальнейшей обработки заказа. Спасибо, что выбираете нас.</p>
+            </div>
+            <div className="purchase-modal-actions">
+              <button className="purchase-modal-btn continue" onClick={() => setShowContactModal(false)}>Ок</button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

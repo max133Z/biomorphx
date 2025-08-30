@@ -133,3 +133,7 @@ nav ul li a.active {
     border: 2px solid var(--dark-bg);
 }
 
+/* Мобильная кнопка корзины — по умолчанию скрыта (включаем в mobile.css) */
+.mobile-cart-top { display: none; }
+.mobile-cart-top-link { text-decoration: none; }
+

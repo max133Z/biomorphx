@@ -1,0 +1,105 @@
+/* Мобильные стили ТОЛЬКО для секции продуктов на главной странице */
+
+@media (max-width: 768px) {
+  /* Оборачиваем в .home-products, чтобы не затронуть другие страницы */
+  .home-products {
+    padding: 12px 0;
+  }
+  .home-products .container { padding: 0 6px; }
+
+  .home-products .section-title {
+    margin-bottom: 10px;
+  }
+
+  .home-products .product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    padding: 0 4px;
+  }
+
+  .home-products .product-card {
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid rgba(147,112,219,0.25);
+    background: rgba(26,31,74,0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    aspect-ratio: 3 / 7;
+    min-height: auto;
+    height: auto !important;
+  }
+
+  /* Фиксированный размер изображения 60x60 */
+  .home-products .product-image {
+    width: 60px !important;
+    height: 60px !important;
+    border-radius: 6px;
+    padding: 2px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  .home-products .product-image img { width: 100%; height: 100%; object-fit: contain; }
+
+  /* Скрываем лишнее для уплотнения */
+  .home-products .product-badge { display: none !important; }
+  .home-products .product-icon-mobile { display: none !important; }
+
+  /* Показываем заголовок/описание на мобайле именно в этой секции */
+  .home-products .product-title {
+    display: -webkit-box !important;
+    font-size: 12.5px;
+    line-height: 1.2;
+    text-align: center;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-width: 100%;
+    min-height: 18px;
+  }
+
+  .home-products .product-subtitle { display: none !important; }
+  .home-products .product-description { display: none !important; }
+
+  .home-products .product-info { display: flex; flex: 1 1 45%; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+
+  /* Цена и мг */
+  .home-products .product-price-quantity {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 2px;
+    width: 100%;
+    margin-top: 2px;
+  }
+  .home-products .product-price {
+    font-size: 13.5px !important;
+    font-weight: 800 !important;
+    text-align: center;
+  }
+  .home-products .product-quantity {
+    font-size: 10.5px;
+    opacity: 0.9;
+  }
+  .home-products .product-quantity i { display: none; }
+
+  /* Кнопку покупок в этой секции скрываем для экономии места */
+  .home-products .action-buttons { display: none !important; }
+}
+
+@media (max-width: 480px) {
+  .home-products .product-grid { gap: 10px; }
+  .home-products .product-card { padding: 8px; }
+  .home-products .product-image { width: 100% !important; height: auto !important; }
+  .home-products .product-title { font-size: 10.5px; min-height: 26px; }
+  .home-products .product-description { font-size: 9px; min-height: 14px; }
+  .home-products .product-price { font-size: 12px !important; }
+  .home-products .product-quantity { font-size: 9.5px; }
+}
+
+

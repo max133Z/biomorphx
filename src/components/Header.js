@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useCart } from "../contexts/CartContext";
+import ClientOnly from "./ClientOnly";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,6 +19,16 @@ const Header = () => {
         <button className="mobile-menu-btn" onClick={toggleMenu}>
           <i className="fas fa-bars"></i>
         </button>
+        {/* Мобильная кнопка корзины в правом верхнем углу */}
+        <div className="mobile-cart-top">
+          <a href="/checkout" className="mobile-cart-top-link">
+            <i className="fas fa-shopping-cart"></i>
+            <span className="cart-text">В корзину</span>
+            <ClientOnly fallback={<span className="cart-count">0</span>}>
+              <span className="cart-count">{getTotalItems()}</span>
+            </ClientOnly>
+          </a>
+        </div>
         <nav>
           <ul className={isMenuOpen ? "show" : ""}>
             <li><a href="/"><i className="fas fa-home"></i> Главная</a></li>
@@ -33,9 +44,9 @@ const Header = () => {
             <li className="cart-icon">
               <a href="/checkout" className="cart-link">
                 <i className="fas fa-shopping-cart"></i>
-                <span className="cart-count">
-                  {getTotalItems()}
-                </span>
+                <ClientOnly fallback={<span className="cart-count">0</span>}>
+                  <span className="cart-count">{getTotalItems()}</span>
+                </ClientOnly>
               </a>
             </li>
           </ul>

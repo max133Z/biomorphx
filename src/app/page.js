@@ -8,9 +8,10 @@ import ReviewCard from "../components/ReviewCard"; // Импортируем к�
 import Header from "../components/Header"; // Импортируем компонент Header
 import Footer from "../components/Footer"; // Импортируем компонент Footer
 import { useCart } from "../contexts/CartContext";
+import "./styles/pages/home-mobile.css";
 
 export default function Home() {
-  const { addToCart, items } = useCart();
+  const { addToCart } = useCart();
 
   return (
     <>
@@ -35,7 +36,7 @@ export default function Home() {
 
 
 
-      <section className="products">
+      <section className="products home-products">
         <div className="container">
           <div className="section-title">
             <h2>Наши продукты</h2>

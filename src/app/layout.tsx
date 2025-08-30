@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Kelly_Slab, Prosto_One } from "next/font/google";
 import "./globals.css";
-import HeadStyles from "./components/HeadStyles";
+// import HeadStyles from "./components/HeadStyles";
 import CartWrapper from "../components/CartWrapper";
+import ExternalResources from "../components/ExternalResources";
 // import MedusaProvider from "../contexts/MedusaProvider";
 
 // Импорты компонентов
@@ -53,12 +54,6 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.ico',
   },
-  other: {
-    'font-awesome': 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
-    'google-fonts-preconnect': 'https://fonts.googleapis.com',
-    'google-fonts-gstatic': 'https://fonts.gstatic.com',
-    'montserrat-alternates': 'https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap',
-  },
 };
 
 export default function RootLayout({
@@ -68,14 +63,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru"> {/* Устанавливаем язык на русский */}
-      <head>
-        <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
-      </head>
       <body className={`${kellySlab.variable} ${prostoOne.variable}`}> {/* Применяем переменные шрифтов */}
-        <HeadStyles />
+        <ExternalResources />
         {/* <MedusaProvider> */}
           <CartWrapper>
             {children}

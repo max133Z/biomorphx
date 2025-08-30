@@ -6,9 +6,13 @@ import ProductCard from "../../components/ProductCard"; // Импортируе�
 import Header from "../../components/Header"; // Импортируем компонент Header
 import Footer from "../../components/Footer"; // Импортируем компонент Footer
 import { useCart } from "../../contexts/CartContext";
+import AddToCartModal from "../../components/AddToCartModal";
+import "../styles/pages/products-mobile.css";
 
 export default function ProductsPage() {
-  const { addToCart } = useCart();
+  const { addToCart, getTotalItems } = useCart();
+  const [modalProduct, setModalProduct] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Отладочная информация
   console.log('Products page loaded');
@@ -36,7 +40,11 @@ export default function ProductsPage() {
               <ProductCard 
                 key={product.id} 
                 product={product} 
-                handleAddToCart={addToCart}
+                handleAddToCart={(p) => {
+                  // на этой странице вместо мгновенного перехода — открываем модалку
+                  setModalProduct(p);
+                  setIsModalOpen(true);
+                }}
               />
             ))}
           </div>
@@ -50,6 +58,20 @@ export default function ProductsPage() {
       </section>
 
       <Footer />
+
+      <AddToCartModal
+        isOpen={isModalOpen}
+        product={modalProduct}
+        onClose={() => setIsModalOpen(false)}
+        onContinue={() => {
+          if (modalProduct) addToCart(modalProduct);
+          setIsModalOpen(false);
+        }}
+        onCheckout={() => {
+          if (modalProduct) addToCart(modalProduct);
+          window.location.href = '/checkout';
+        }}
+      />
     </>
   );
 }

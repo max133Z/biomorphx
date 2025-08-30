@@ -1,5 +1,149 @@
 /* ===== ДЕСКТОПНЫЕ СТИЛИ (≤1200px) ===== */
 
+@media (min-width: 769px) {
+    /* Карточки продуктов для десктопа */
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 35px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    
+    .product-card {
+        min-height: 360px;
+        max-width: 340px;
+    }
+    
+    .product-image {
+        height: 180px;
+    }
+    
+    .product-image img {
+        max-height: 120px;
+        max-width: 120px;
+    }
+    
+    .product-title {
+        font-size: 18px;
+        margin-bottom: 6px;
+        text-align: center;
+        font-weight: 600;
+        line-height: 1.2;
+        min-height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .product-card .product-subtitle {
+        font-size: 13px;
+        margin-bottom: 9px;
+        min-height: 58px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1.3;
+        text-align: center;
+    }
+    
+    .product-info {
+        padding: 14px;
+        padding-bottom: 16px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .product-title {
+        font-size: 18px;
+        margin-bottom: 6px;
+        min-height: 24px;
+        display: flex;
+        align-items: flex-start;
+    }
+    
+    .product-actions {
+        min-height: 65px;
+        gap: 6px;
+    }
+    
+    .product-price-quantity {
+        padding: 10px 12px;
+        margin-bottom: 6px;
+    }
+    
+    .product-price {
+        font-size: 20px;
+        text-align: center;
+    }
+    
+    .product-quantity {
+        font-size: 11px;
+        text-align: center;
+    }
+    
+    .product-quantity i {
+        font-size: 9px;
+        margin-right: 3px;
+    }
+    
+    /* Скрываем иконку молекулы на десктопе */
+    .product-icon-mobile {
+        display: none;
+    }
+    
+    .btn-buy {
+        padding: 12px 18px !important;
+        font-size: 14px !important;
+    }
+    
+    /* Стили для иконки корзины на десктопе */
+    .cart-icon {
+        position: relative;
+        margin-left: 20px;
+        display: block !important;
+    }
+    
+    .cart-link {
+        font-size: 18px;
+        padding: 12px 16px;
+        border-radius: 10px;
+        display: flex !important;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .cart-link i {
+        font-size: 22px;
+        display: inline-block !important;
+    }
+    
+    .cart-count {
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+        top: -12px;
+        right: -12px;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Стили для всех иконок в навигации на десктопе */
+    nav ul li a i {
+        font-size: 16px;
+        display: inline-block !important;
+    }
+    
+    nav ul li a svg {
+        width: 18px;
+        height: 18px;
+        display: inline-block !important;
+    }
+    
+
+}
+
+
 @media (max-width: 1200px) {
     /* Главная страница */
     .hero-content, .featured-container, .science-content {

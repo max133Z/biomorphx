@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect, useState } from 'react';
 
 const CartContext = createContext();
 
@@ -77,16 +77,15 @@ export const CartProvider = ({ children }) => {
       }
     };
 
-    // Загружаем только на клиенте
-    if (typeof window !== 'undefined') {
-      loadCart();
-    }
+    loadCart();
   }, []);
 
   // Сохраняем корзину в localStorage при изменении
   useEffect(() => {
-    if (typeof window !== 'undefined' && state.items.length > 0) {
+    if (state.items.length > 0) {
       localStorage.setItem('cart', JSON.stringify(state.items));
+    } else {
+      localStorage.removeItem('cart');
     }
   }, [state.items]);
 
@@ -115,10 +114,12 @@ export const CartProvider = ({ children }) => {
   };
 
   const getTotalItems = () => {
+    if (typeof window === 'undefined') return 0;
     return state.items.reduce((total, item) => total + item.quantity, 0);
   };
 
   const getTotalPrice = () => {
+    if (typeof window === 'undefined') return 0;
     return state.items.reduce((total, item) => {
       // Проверяем, что item.price и item.quantity существуют и являются числами
       const price = typeof item.price === 'number' ? item.price : 0;

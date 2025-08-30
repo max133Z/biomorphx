@@ -1,17 +1,16 @@
 "use client";
 
-import { useState } from 'react';
-import PurchaseModal from '../app/components/PurchaseModal';
+// router не нужен для карточки, действие делегируем через handleAddToCart
 
 const ProductCard = ({ product, handleAddToCart, showDescription = false }) => {
-  const [showPurchaseModal, setShowPurchaseModal] = useState(false);
+  
 
-  const handleBuyClick = () => {
-    setShowPurchaseModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowPurchaseModal(false);
+  const handleBuyClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // На странице продуктов мы перехватываем handleAddToCart, чтобы показать модалку
+    // На других страницах поведение может быть другим
+    handleAddToCart(product);
   };
 
   // Функция для получения иконки в зависимости от типа продукта
@@ -70,11 +69,7 @@ const ProductCard = ({ product, handleAddToCart, showDescription = false }) => {
             </span>
           </div>
           <div className="action-buttons">
-            <button className="btn btn-buy" onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              handleBuyClick();
-            }}>
+            <button className="btn btn-buy" onClick={handleBuyClick}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 22C9.55228 22 10 21.5523 10 21C10 20.4477 9.55228 20 9 20C8.44772 20 8 20.4477 8 21C8 21.5523 8.44772 22 9 22Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 <path d="M20 22C20.5523 22 21 21.5523 21 21C21 20.4477 20.5523 20 20 20C19.4477 20 19 20.4477 19 21C19 21.5523 19.4477 22 20 22Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -85,12 +80,6 @@ const ProductCard = ({ product, handleAddToCart, showDescription = false }) => {
           </div>
         </div>
       </div>
-      
-      <PurchaseModal 
-        isOpen={showPurchaseModal}
-        onClose={handleCloseModal}
-        product={product}
-      />
     </a>
   );
 };

@@ -10,12 +10,12 @@
     overflow: hidden;
 }
 
-.page-hero {
+.page-hero, .products-page-hero {
     min-height: 20vh;
-    padding: 180px 0 80px;
+    padding: 90px 0 50px;
 }
 
-.hero::before, .page-hero::before {
+.hero::before, .page-hero::before, .products-page-hero::before {
     content: '';
     position: absolute;
     top: -50%;
@@ -28,7 +28,7 @@
     animation: pulse 8s infinite alternate;
 }
 
-.hero::after, .page-hero::after {
+.hero::after, .page-hero::after, .products-page-hero::after {
     content: '';
     position: absolute;
     bottom: -30%;
@@ -53,9 +53,24 @@
     position: relative;
     z-index: 2;
     max-width: 800px;
-    height: 50px;
     margin: 0 auto;
     text-align: center;
+    padding: 20px 0;
+}
+
+.page-hero-content h1 {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 1    0px;
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.page-hero-content p {
+    font-size: 18px;
+    color: var(--text);
+    opacity: 0.9;
+    line-height: 1.6;
 }
 
 .hero-text {
