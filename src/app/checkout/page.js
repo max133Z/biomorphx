@@ -134,7 +134,7 @@ const CheckoutPage = () => {
         setOrderSuccess(true);
       } else if (response.status === 409) {
         // Заказ уже был создан
-        alert('Заказ уже был создан. Пожалуйста, не отправляйте форму повторно.');
+        alert('Похожий заказ уже был создан недавно. Если вы хотите оформить новый заказ, подождите 2 минуты или измените состав корзины.');
         if (result.orderId) {
           clearCart();
           setOrderSuccess(true);

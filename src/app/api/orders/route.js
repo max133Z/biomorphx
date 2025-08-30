@@ -27,15 +27,16 @@ export async function POST(request) {
 
       // Проверяем, не был ли уже создан заказ с таким же хешем (защита от дублирования)
       if (orderHash) {
+        // Проверяем заказы за последние 2 минуты с той же суммой и email
         const [existingOrder] = await conn.query(
-          'SELECT id FROM orders WHERE customer_email = ? AND total_price = ? AND created_at > DATE_SUB(NOW(), INTERVAL 5 MINUTE)',
+          'SELECT id FROM orders WHERE customer_email = ? AND total_price = ? AND created_at > DATE_SUB(NOW(), INTERVAL 2 MINUTE)',
           [customer.email, total]
         );
         
         if (existingOrder.length > 0) {
           await conn.rollback();
           return NextResponse.json({ 
-            error: 'Заказ уже был создан. Пожалуйста, не отправляйте форму повторно.',
+            error: 'Похожий заказ уже был создан недавно. Если вы хотите оформить новый заказ, подождите 2 минуты или измените состав корзины.',
             orderId: existingOrder[0].id 
           }, { status: 409 });
         }
