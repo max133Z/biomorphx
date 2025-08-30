@@ -84,9 +84,9 @@ export default function ProductDetailPage({ params }) {
               ))}
             </div>
 
-            <div className="product-meta">
+            <div className="product-price-quantity">
               <span className="product-price">{product.price} ₽</span>
-              <span className="product-quantity"><i className="fas fa-capsules"></i> {product.quantity}</span>
+              <span className="product-quantity">{product.quantity}</span>
             </div>
 
             <div className="add-to-cart">

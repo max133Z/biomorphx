@@ -14,7 +14,7 @@
   .home-products .product-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
+    gap: 20px;
     padding: 0 4px;
   }
 
@@ -93,7 +93,7 @@
 }
 
 @media (max-width: 480px) {
-  .home-products .product-grid { gap: 10px; }
+  .home-products .product-grid { gap: 16px; }
   .home-products .product-card { padding: 8px; }
   .home-products .product-image { width: 100% !important; height: auto !important; }
   .home-products .product-title { font-size: 10.5px; min-height: 26px; }

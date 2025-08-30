@@ -27,3 +27,14 @@ export async function sendOrderEmail({ to, subject, html }) {
   });
   return info;
 }
+
+export async function sendContactEmail({ to, subject, html }) {
+  const t = getTransporter();
+  const info = await t.sendMail({
+    from: process.env.SMTP_FROM,
+    to,
+    subject,
+    html,
+  });
+  return info;
+}

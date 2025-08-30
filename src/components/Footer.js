@@ -25,7 +25,6 @@ const Footer = () => {
               <ul>
                 <li><a href="/delivery"><i className="fas fa-flask"></i> Доставка</a></li>
                 <li><a href="/contact"><i className="fas fa-envelope"></i> Контакты</a></li>
-                <li><a href="/admin/login"><i className="fas fa-cog"></i> Админ-панель</a></li>
               </ul>
             </div>
         </div>

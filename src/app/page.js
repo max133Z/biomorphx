@@ -8,6 +8,7 @@ import ReviewCard from "../components/ReviewCard"; // Импортируем к�
 import Header from "../components/Header"; // Импортируем компонент Header
 import Footer from "../components/Footer"; // Импортируем компонент Footer
 import { useCart } from "../contexts/CartContext";
+import WhatsAppWidget from "../components/WhatsAppWidget";
 import "./styles/pages/home-mobile.css";
 
 export default function Home() {
@@ -123,6 +124,7 @@ export default function Home() {
         </div>
       </section>
 
+      <WhatsAppWidget />
       <Footer />
     </>
   );
