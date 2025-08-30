@@ -381,3 +381,4 @@ echo "   2. Настройте SMTP в файле .env"
 echo "   3. Настройте автоматические бэкапы"
 echo ""
 echo "📖 Подробная информация: /home/biomorphx/biomorphx/DEPLOYMENT_INFO.md"
+

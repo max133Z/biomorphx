@@ -5,8 +5,9 @@ import { sendOrderEmail } from '../../../lib/email';
 export async function POST(request) {
   try {
     const body = await request.json();
-    const { customer, items, total } = body || {};
+    const { customer, items, total, orderHash } = body || {};
     const isTest = process.env.TEST_MODE === '1';
+    
     if (!customer?.email || !Array.isArray(items) || !items.length || typeof total !== 'number') {
       return NextResponse.json({ error: 'Неверные данные заказа' }, { status: 400 });
     }
@@ -20,12 +21,29 @@ export async function POST(request) {
 
     const pool = getDbPool();
     const conn = await pool.getConnection();
+    
     try {
       await conn.beginTransaction();
 
+      // Проверяем, не был ли уже создан заказ с таким же хешем (защита от дублирования)
+      if (orderHash) {
+        const [existingOrder] = await conn.query(
+          'SELECT id FROM orders WHERE customer_email = ? AND total_price = ? AND created_at > DATE_SUB(NOW(), INTERVAL 5 MINUTE)',
+          [customer.email, total]
+        );
+        
+        if (existingOrder.length > 0) {
+          await conn.rollback();
+          return NextResponse.json({ 
+            error: 'Заказ уже был создан. Пожалуйста, не отправляйте форму повторно.',
+            orderId: existingOrder[0].id 
+          }, { status: 409 });
+        }
+      }
+
       const [orderResult] = await conn.query(
-        `INSERT INTO orders (customer_email, customer_name, customer_phone, shipping_address, total_price, status)
-         VALUES (?, ?, ?, ?, ?, 'pending')`,
+        `INSERT INTO orders (customer_email, customer_name, customer_phone, shipping_address, total_price, status, email_sent)
+         VALUES (?, ?, ?, ?, ?, 'pending', FALSE)`,
         [
           customer.email,
           `${customer.firstName || ''} ${customer.lastName || ''}`.trim() || null,
@@ -46,23 +64,35 @@ export async function POST(request) {
 
       await conn.commit();
 
-      const html = `
-        <h2>Новый заказ #${orderId}</h2>
-        <p><strong>Клиент:</strong> ${customer.firstName || ''} ${customer.lastName || ''}</p>
-        <p><strong>Email:</strong> ${customer.email}</p>
-        <p><strong>Телефон:</strong> ${customer.phone || ''}</p>
-        <p><strong>Адрес:</strong> ${customer.address || ''}</p>
-        <h3>Товары:</h3>
-        ${items.map(i => `<div style="margin:8px 0;">${i.title || i.name} — ${i.quantity} шт. × ${i.unitPrice || i.price} ₽</div>`).join('')}
-        <h3>Итого: ${total} ₽</h3>
-      `;
-
+      // Отправляем email только при создании нового заказа
       if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_FROM) {
-        await sendOrderEmail({
-          to: process.env.ORDER_EMAIL_TO || customer.email,
-          subject: `Новый заказ #${orderId}`,
-          html,
-        });
+        try {
+          const html = `
+            <h2>Новый заказ #${orderId}</h2>
+            <p><strong>Клиент:</strong> ${customer.firstName || ''} ${customer.lastName || ''}</p>
+            <p><strong>Email:</strong> ${customer.email}</p>
+            <p><strong>Телефон:</strong> ${customer.phone || ''}</p>
+            <p><strong>Адрес:</strong> ${customer.address || ''}</p>
+            <h3>Товары:</h3>
+            ${items.map(i => `<div style="margin:8px 0;">${i.title || i.name} — ${i.quantity} шт. × ${i.unitPrice || i.price} ₽</div>`).join('')}
+            <h3>Итого: ${total} ₽</h3>
+          `;
+
+          await sendOrderEmail({
+            to: process.env.ORDER_EMAIL_TO || customer.email,
+            subject: `Новый заказ #${orderId}`,
+            html,
+          });
+
+          // Отмечаем, что email отправлен
+          await conn.query(
+            `UPDATE orders SET email_sent = TRUE WHERE id = ?`,
+            [orderId]
+          );
+        } catch (emailError) {
+          console.error('Ошибка отправки email:', emailError);
+          // Не прерываем создание заказа из-за ошибки email
+        }
       }
 
       return NextResponse.json({ success: true, orderId });

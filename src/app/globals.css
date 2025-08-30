@@ -6,6 +6,7 @@
 /* Импорт стилей страниц */
 @import './styles/pages/checkout-page.css';
 @import './styles/pages/article-page.css';
+@import './styles/pages/privacy-policy.css';
 @import './styles/components/purchase-modal.css';
 
 /* CSS переменные */

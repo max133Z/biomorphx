@@ -27,6 +27,7 @@ export async function initSchema() {
       shipping_address TEXT NULL,
       total_price BIGINT NOT NULL,
       status VARCHAR(32) NOT NULL DEFAULT 'pending',
+      email_sent BOOLEAN DEFAULT FALSE,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
   `;

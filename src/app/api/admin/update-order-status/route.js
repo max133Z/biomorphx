@@ -23,3 +23,4 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Ошибка сервера' }, { status: 500 });
   }
 }
+

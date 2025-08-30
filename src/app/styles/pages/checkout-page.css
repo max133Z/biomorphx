@@ -581,6 +581,89 @@
   transform: translateY(-1px);
 }
 
+/* Согласие с политикой */
+.privacy-agreement {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(26, 31, 74, 0.4);
+  border: 1px solid rgba(147, 112, 219, 0.2);
+  border-radius: 12px;
+}
+
+.privacy-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  position: relative;
+}
+
+.privacy-checkbox input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  height: 20px;
+  width: 20px;
+  background: rgba(26, 31, 74, 0.6);
+  border: 2px solid rgba(147, 112, 219, 0.3);
+  border-radius: 4px;
+  position: relative;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all 0.3s ease;
+}
+
+.privacy-checkbox:hover .checkmark {
+  border-color: var(--accent);
+  background: rgba(147, 112, 219, 0.1);
+}
+
+.privacy-checkbox input:checked ~ .checkmark {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.privacy-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.privacy-text {
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.privacy-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.privacy-link:hover {
+  color: var(--secondary);
+  text-decoration: underline;
+}
+
 /* Преимущества */
 .checkout-benefits {
   padding: 25px 30px;

@@ -166,6 +166,18 @@ export default function AdminPanel() {
     return statusMap[status] || status;
   };
 
+  const getStatusIcon = (status) => {
+    const iconMap = {
+      'pending': 'fas fa-clock',
+      'confirmed': 'fas fa-check-circle',
+      'processing': 'fas fa-cogs',
+      'shipped': 'fas fa-shipping-fast',
+      'delivered': 'fas fa-box-check',
+      'cancelled': 'fas fa-times-circle'
+    };
+    return iconMap[status] || 'fas fa-question-circle';
+  };
+
   const getStatusColor = (status) => {
     const colorMap = {
       'pending': '#ffa500',
@@ -303,6 +315,7 @@ export default function AdminPanel() {
                             className="order-status"
                             style={{ backgroundColor: getStatusColor(order.status) }}
                           >
+                            <i className={getStatusIcon(order.status)}></i>
                             {getOrderStatus(order.status)}
                           </span>
                         </div>
@@ -320,7 +333,7 @@ export default function AdminPanel() {
                             <strong>Телефон:</strong> {order.customer_phone}
                             {order.customer_phone && (
                               <a 
-                                href={`https://wa.me/79211840464?text=Добрый день, пишите - проконсультирую. Заказ #${order.id}`}
+                                href={`https://wa.me/${order.customer_phone.replace(/\D/g, '')}?text=Добрый день, пишите - проконсультирую. Заказ #${order.id}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="whatsapp-link"
@@ -365,9 +378,11 @@ export default function AdminPanel() {
                         
                         <button 
                           onClick={() => sendOrderEmail(order.id)}
-                          className="btn-send-email"
+                          className={`btn-send-email ${order.email_sent ? 'sent' : ''}`}
+                          disabled={order.email_sent}
                         >
-                          <i className="fas fa-envelope"></i> Email
+                          <i className="fas fa-envelope"></i> 
+                          {order.email_sent ? 'Отправлен' : 'Email'}
                         </button>
                         
                         <button 

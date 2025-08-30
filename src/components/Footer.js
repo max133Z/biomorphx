@@ -20,13 +20,14 @@ const Footer = () => {
               <li><a href="/science"><i className="fas fa-flask"></i> Наука</a></li>
             </ul>
           </div>
-                      <div className="footer-column">
-              <h3>Поддержка</h3>
-              <ul>
-                <li><a href="/delivery"><i className="fas fa-flask"></i> Доставка</a></li>
-                <li><a href="/contact"><i className="fas fa-envelope"></i> Контакты</a></li>
-              </ul>
-            </div>
+          <div className="footer-column">
+            <h3>Поддержка</h3>
+            <ul>
+              <li><a href="/delivery"><i className="fas fa-truck"></i> Доставка</a></li>
+              <li><a href="/contact"><i className="fas fa-envelope"></i> Контакты</a></li>
+              <li><a href="/order-processing-policy"><i className="fas fa-shield-alt"></i> Политика конфиденциальности</a></li>
+            </ul>
+          </div>
         </div>
         <div className="footer-bottom">
           <p>© 2025 BioMorphX. Все права защищены. Информация на сайте не является медицинской рекомендацией. Проконсультируйтесь со специалистом перед применением.</p>

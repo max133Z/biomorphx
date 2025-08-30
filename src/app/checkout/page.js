@@ -30,6 +30,8 @@ const CheckoutPage = () => {
     notes: ''
   });
 
+  const [privacyAgreement, setPrivacyAgreement] = useState(false);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderSuccess, setOrderSuccess] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
@@ -77,9 +79,26 @@ const CheckoutPage = () => {
       return;
     }
 
+    if (!privacyAgreement) {
+      alert('Необходимо согласиться с политикой обработки персональных данных');
+      return;
+    }
+
+    if (isSubmitting) {
+      return; // Предотвращаем повторную отправку
+    }
+
     setIsSubmitting(true);
 
     try {
+      // Создаем хеш заказа для предотвращения дублирования
+      const orderHash = btoa(JSON.stringify({
+        email: formData.email,
+        items: items.map(item => ({ id: item.id, quantity: item.quantity })),
+        total: getTotalPrice(),
+        timestamp: Date.now()
+      }));
+
       const orderData = {
         customer: {
           firstName: formData.firstName,
@@ -96,7 +115,8 @@ const CheckoutPage = () => {
           quantity: item.quantity,
           unitPrice: item.price
         })),
-        total: getTotalPrice()
+        total: getTotalPrice(),
+        orderHash
       };
 
       const response = await fetch('/api/orders', {
@@ -107,16 +127,24 @@ const CheckoutPage = () => {
         body: JSON.stringify(orderData)
       });
 
+      const result = await response.json();
+
       if (response.ok) {
-        const result = await response.json();
         clearCart();
         setOrderSuccess(true);
+      } else if (response.status === 409) {
+        // Заказ уже был создан
+        alert('Заказ уже был создан. Пожалуйста, не отправляйте форму повторно.');
+        if (result.orderId) {
+          clearCart();
+          setOrderSuccess(true);
+        }
       } else {
-        throw new Error('Ошибка при отправке заказа');
+        throw new Error(result.error || 'Ошибка при отправке заказа');
       }
     } catch (error) {
       console.error('Ошибка заказа:', error);
-      alert('Произошла ошибка при оформлении заказа. Попробуйте еще раз.');
+      alert(error.message || 'Произошла ошибка при оформлении заказа. Попробуйте еще раз.');
     } finally {
       setIsSubmitting(false);
     }
@@ -521,12 +549,35 @@ const CheckoutPage = () => {
               </div>
               
               <div className="checkout-actions">
+                <div className="privacy-agreement">
+                  <label className="privacy-checkbox">
+                    <input
+                      type="checkbox"
+                      checked={privacyAgreement}
+                      onChange={(e) => setPrivacyAgreement(e.target.checked)}
+                      required
+                    />
+                    <span className="checkmark"></span>
+                    <span className="privacy-text">
+                      Я соглашаюсь с{' '}
+                      <a 
+                        href="/order-processing-policy" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="privacy-link"
+                      >
+                        политикой обработки персональных данных
+                      </a>
+                    </span>
+                  </label>
+                </div>
+                
                 <button 
                   type="submit"
                   form="checkout-form"
                   className="submit-order-btn"
                   onClick={handleSubmitOrder}
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !privacyAgreement}
                 >
                   <i className="fas fa-check"></i> 
                   {isSubmitting ? 'Оформляем заказ...' : 'Оформить заказ'}

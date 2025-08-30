@@ -24,3 +24,4 @@ export async function GET() {
     return NextResponse.json({ error: 'Ошибка сервера' }, { status: 500 });
   }
 }
+

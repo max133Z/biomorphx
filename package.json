@@ -6,7 +6,8 @@
     "dev": "npx next dev",
     "build": "npx next build",
     "start": "npx next start",
-    "lint": "npx next lint"
+    "lint": "npx next lint",
+    "update-db": "node src/scripts/update-database.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.0.0",
