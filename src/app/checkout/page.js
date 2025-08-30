@@ -71,8 +71,55 @@ const CheckoutPage = () => {
   // Обработка отправки заказа
   const handleSubmitOrder = async (e) => {
     e.preventDefault();
-    // Показываем информационное окно вместо реальной отправки
-    setShowContactModal(true);
+    
+    if (!formData.email || !formData.firstName || !formData.phone) {
+      alert('Пожалуйста, заполните обязательные поля: Email, Имя и Телефон');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const orderData = {
+        customer: {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          phone: formData.phone,
+          address: formData.deliveryMethod === 'cdek' ? formData.cdekAddress :
+                  formData.deliveryMethod === 'post' ? `${formData.postAddress}, ${formData.postIndex}` :
+                  formData.expressAddress
+        },
+        items: items.map(item => ({
+          productId: item.id,
+          title: item.name,
+          quantity: item.quantity,
+          unitPrice: item.price
+        })),
+        total: getTotalPrice()
+      };
+
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData)
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        clearCart();
+        setOrderSuccess(true);
+      } else {
+        throw new Error('Ошибка при отправке заказа');
+      }
+    } catch (error) {
+      console.error('Ошибка заказа:', error);
+      alert('Произошла ошибка при оформлении заказа. Попробуйте еще раз.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Если корзина пуста, перенаправляем на главную
@@ -478,9 +525,11 @@ const CheckoutPage = () => {
                   type="submit"
                   form="checkout-form"
                   className="submit-order-btn"
-                  onClick={(e) => { e.preventDefault(); setShowContactModal(true); }}
+                  onClick={handleSubmitOrder}
+                  disabled={isSubmitting}
                 >
-                  <i className="fas fa-check"></i> Оформить заказ
+                  <i className="fas fa-check"></i> 
+                  {isSubmitting ? 'Оформляем заказ...' : 'Оформить заказ'}
                 </button>
                 
                 <Link href="/products" className="back-to-cart-btn">
