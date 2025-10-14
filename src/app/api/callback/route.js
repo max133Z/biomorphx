@@ -4,12 +4,12 @@ import { checkRateLimit, getClientIp } from '../../../lib/rate-limit';
 import { sanitizeHtml } from '../../../lib/auth';
 
 export async function POST(request) {
-  // Rate limiting: макс 3 обратных звонка в час с одного IP
+  // Rate limiting: макс 15 обратных звонков в час с одного IP
   const ip = getClientIp(request);
   const limitCheck = checkRateLimit(`callback:${ip}`, {
-    maxRequests: 3,
+    maxRequests: 15,
     windowMs: 60 * 60 * 1000, // 1 час
-    message: 'Слишком много запросов на обратный звонок. Пожалуйста, попробуйте позже.'
+    message: 'Слишком много запросов на обратный звонок. Пожалуйста, попробуйте позже или позвоните нам напрямую.'
   });
 
   if (!limitCheck.allowed) {

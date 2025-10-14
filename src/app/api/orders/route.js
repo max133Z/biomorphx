@@ -5,12 +5,12 @@ import { sanitizeHtml } from '../../../lib/auth';
 import { checkRateLimit, getClientIp } from '../../../lib/rate-limit';
 
 export async function POST(request) {
-  // Rate limiting: макс 5 заказов в час с одного IP
+  // Rate limiting: макс 20 заказов в час с одного IP
   const ip = getClientIp(request);
   const limitCheck = checkRateLimit(`order:${ip}`, {
-    maxRequests: 5,
+    maxRequests: 20,
     windowMs: 60 * 60 * 1000, // 1 час
-    message: 'Слишком много заказов. Пожалуйста, попробуйте позже.'
+    message: 'Слишком много заказов с вашего IP. Пожалуйста, попробуйте позже или свяжитесь с нами.'
   });
 
   if (!limitCheck.allowed) {

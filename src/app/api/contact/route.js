@@ -5,12 +5,12 @@ import { sanitizeHtml, isValidEmail, isValidPhone, limitLength } from '../../../
 import { checkRateLimit, getClientIp } from '../../../lib/rate-limit';
 
 export async function POST(request) {
-  // Rate limiting: макс 3 сообщения в час с одного IP
+  // Rate limiting: макс 15 сообщений в час с одного IP
   const ip = getClientIp(request);
   const limitCheck = checkRateLimit(`contact:${ip}`, {
-    maxRequests: 3,
+    maxRequests: 15,
     windowMs: 60 * 60 * 1000, // 1 час
-    message: 'Слишком много сообщений. Пожалуйста, попробуйте позже.'
+    message: 'Вы отправили много сообщений. Пожалуйста, попробуйте позже или позвоните нам.'
   });
 
   if (!limitCheck.allowed) {

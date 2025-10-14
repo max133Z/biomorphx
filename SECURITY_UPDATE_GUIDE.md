@@ -195,10 +195,10 @@ curl -u admin:ВАШ_ПАРОЛЬ https://biomorphx.ru/api/admin/orders
 
 ### 4. Проверка Rate Limiting
 
-**Отправить 6 запросов на создание заказа (лимит: 5 в час):**
+**Отправить 21 запрос на создание заказа (лимит: 20 в час):**
 
 ```bash
-for i in {1..6}; do
+for i in {1..21}; do
   echo "=== Request $i ==="
   curl -X POST https://biomorphx.ru/api/orders \
     -H "Content-Type: application/json" \
@@ -219,8 +219,8 @@ done
 ```
 
 **Ожидаемый результат:**
-- Запросы 1-5: статус `200` или `400` (валидация)
-- Запрос 6: статус `429` (Too Many Requests)
+- Запросы 1-20: статус `200` или `400` (валидация)
+- Запрос 21: статус `429` (Too Many Requests)
 
 ---
 
