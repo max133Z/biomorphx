@@ -1,0 +1,46 @@
+# Команды для обновления GitHub репозитория
+# Выполните эти команды в новом терминале PowerShell
+
+# 1. Перейдите в папку проекта
+cd "C:\Users\maksim.kazantsev\Desktop\biomorphx upgrade"
+
+# 2. Проверьте Git
+git --version
+
+# 3. Настройте Git (если еще не настроен)
+git config --global user.name "max133Z"
+git config --global user.email "maksim.kazantsev@example.com"
+
+# 4. Проверьте статус
+git status
+
+# 5. Добавьте все изменения
+git add .
+
+# 6. Создайте коммит
+git commit -m "Обновление проекта: мобильная адаптация, email улучшения, страница статей, оптимизация
+
+- Добавлено лого BioMorphX по центру на мобильных устройствах
+- Улучшены email уведомления: комментарий к заказу, способ оплаты, отдельное отображение индекса
+- Добавлена валидация адресов доставки (обязательные поля)
+- Создана новая страница /articles со списком статей
+- Убрана ссылка 'Статьи' из навигации, добавлена кнопка 'Все статьи' на главной
+- Оптимизация: удалены 34 ненужных файла (документация, тесты, миграции)
+
+Измененные файлы:
+- src/app/checkout/page.js
+- src/app/api/orders/route.js
+- src/lib/db.js
+- src/components/Header.js
+- src/components/Footer.js
+- src/app/page.js
+- src/app/styles/responsive/mobile.css
+- src/app/articles/page.js (новый)
+- src/app/styles/pages/articles-list.css (новый)"
+
+# 7. Отправьте изменения на GitHub
+git push origin main
+
+# Если попросит авторизацию, используйте Personal Access Token вместо пароля
+# Создать токен можно тут: https://github.com/settings/tokens
+

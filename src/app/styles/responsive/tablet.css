@@ -1,0 +1,215 @@
+/* ===== ПЛАНШЕТНЫЕ СТИЛИ (≤992px) ===== */
+
+@media (max-width: 992px) {
+    /* ===== TOP HEADER (верхняя шапка) ===== */
+    .top-header {
+        padding: 5px 0;
+    }
+    
+    .top-header-left {
+        gap: 15px;
+    }
+    
+    .top-header-left span {
+        font-size: 11px;
+    }
+    
+    .callback-btn {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+    
+    /* ===== MAIN HEADER ===== */
+    header {
+        padding: 12px 0;
+    }
+    
+    .logo {
+        font-size: 24px;
+    }
+    
+    nav ul {
+        gap: 20px;
+    }
+    
+    nav ul li a {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+    
+    .cart-link {
+        font-size: 15px;
+        padding: 8px 12px;
+    }
+    
+    .cart-link i {
+        font-size: 16px;
+    }
+    
+    /* Главная страница */
+    .featured-container {
+        flex-direction: column;
+    }
+    
+    .featured-image {
+        width: 100%;
+        max-width: 500px;
+        height: 680px;
+        margin-bottom: 40px;
+    }
+    
+    .featured-highlights {
+        grid-template-columns: 1fr;
+    }
+    
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+
+    /* Страница продуктов */
+    .products-page-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+    }
+    
+    .products-page-grid .product-card {
+        width: 100%;
+        height: auto;
+    }
+    
+    .products-page-grid .product-image {
+        height: 400px;
+    }
+    
+    .products-page-grid .product-title {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    
+    .products-page-grid .product-subtitle {
+        font-size: 13px;
+        margin-bottom: 10px;
+        color: var(--text);
+    }
+    
+    .products-page-grid .product-description {
+        font-size: 12px;
+        margin-bottom: 20px;
+        min-height: 80px;
+        color: var(--text);
+    }
+    
+    .products-page-grid .product-price {
+        font-size: 22px;
+    }
+    
+    .products-page-grid .product-price-quantity {
+        padding: 13px 18px;
+        margin-bottom: 13px;
+    }
+    
+    .products-page-grid .product-quantity {
+        font-size: 12px;
+        color: var(--text);
+    }
+    
+    .products-page-grid .product-actions {
+        gap: 10px;
+    }
+    
+    .products-page-grid .product-actions .btn {
+        padding: 11px 20px;
+        font-size: 15px;
+        white-space: nowrap;
+        min-width: 130px;
+    }
+
+    /* Детальная страница продукта */
+    .product-detail-container {
+        flex-direction: column;
+        gap: 40px;
+        padding: 40px;
+    }
+    
+    .product-detail-image {
+        width: 100%;
+        max-width: 550px;
+        height: 520px;
+    }
+    
+    .product-detail-content h1 {
+        font-size: 38px;
+        font-family: 'Montserrat Alternates', sans-serif;
+    }
+    
+    .product-detail-subtitle {
+        font-size: 18px;
+        font-family: 'Montserrat Alternates', sans-serif;
+    }
+    
+    .product-detail-long-description {
+        font-size: 16px;
+    }
+
+    /* Админ панель */
+    .admin-sidebar {
+        width: 250px;
+    }
+    
+    .admin-main {
+        padding: 1rem;
+    }
+    
+    .admin-stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .admin-products-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .admin-product-card {
+        padding: 1rem;
+    }
+    
+    .admin-product-image {
+        height: 120px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .admin-form {
+        padding: 1.5rem;
+    }
+}
+
+/* ===== СРЕДНИЕ ПЛАНШЕТЫ (769px - 992px) ===== */
+@media (min-width: 769px) and (max-width: 992px) {
+    /* На планшетах показываем полное меню, но компактное */
+    .mobile-menu-btn {
+        display: none;
+    }
+    
+    .logo {
+        display: block !important;
+    }
+    
+    nav ul {
+        display: flex !important;
+    }
+    
+    .mobile-cart-top {
+        display: none !important;
+    }
+    
+    .cart-icon {
+        display: block !important;
+    }
+}
+

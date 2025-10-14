@@ -1,0 +1,214 @@
+/* ===== МОДАЛЬНОЕ ОКНО ПОКУПКИ ===== */
+
+.purchase-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000; /* поверх всего */
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+}
+
+.purchase-modal {
+    background: linear-gradient(45deg, rgba(10, 14, 42, 0.95) 0%, rgba(26, 31, 74, 0.95) 100%);
+    border: 1px solid rgba(147, 112, 219, 0.3);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    animation: slideIn 0.3s ease;
+}
+
+.purchase-modal-header {
+    margin-bottom: 30px;
+}
+
+.purchase-modal-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.purchase-modal-subtitle {
+    font-size: 16px;
+    color: var(--secondary);
+    line-height: 1.6;
+}
+
+.purchase-modal-product {
+    background: rgba(26, 31, 74, 0.4);
+    border: 1px solid rgba(147, 112, 219, 0.2);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.purchase-modal-product-image {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, #1a1f4a, #0a0e2a);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.purchase-modal-product-image img {
+    max-width: 70%;
+    max-height: 70%;
+    object-fit: contain;
+}
+
+.purchase-modal-product-info {
+    flex: 1;
+    text-align: left;
+}
+
+.purchase-modal-product-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 5px;
+}
+
+.purchase-modal-product-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.purchase-modal-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.purchase-modal-btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 160px;
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.purchase-modal-btn.continue {
+    background: linear-gradient(45deg, var(--accent) 0%, var(--orange) 100%);
+    color: var(--dark-bg);
+}
+
+.purchase-modal-btn.continue:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(147, 112, 219, 0.4);
+}
+
+.purchase-modal-btn.checkout {
+    background: transparent;
+    color: var(--text);
+    border: 2px solid var(--accent);
+}
+
+.purchase-modal-btn.checkout:hover {
+    background: var(--accent);
+    color: var(--dark-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(147, 112, 219, 0.4);
+}
+
+.purchase-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: var(--secondary);
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.purchase-modal-close:hover {
+    color: var(--text);
+    background: rgba(147, 112, 219, 0.1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Мобильные стили */
+@media (max-width: 768px) {
+    .purchase-modal {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+    
+    .purchase-modal-title {
+        font-size: 24px;
+    }
+    
+    .purchase-modal-product {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .purchase-modal-product-info {
+        text-align: center;
+    }
+    
+    .purchase-modal-actions {
+        flex-direction: column;
+    }
+    
+    .purchase-modal-btn {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+
