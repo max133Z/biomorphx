@@ -1,7 +1,32 @@
 import { NextResponse } from 'next/server';
 import { sendEmail } from '../../../lib/email';
+import { checkRateLimit, getClientIp } from '../../../lib/rate-limit';
+import { sanitizeHtml } from '../../../lib/auth';
 
 export async function POST(request) {
+  // Rate limiting: макс 3 обратных звонка в час с одного IP
+  const ip = getClientIp(request);
+  const limitCheck = checkRateLimit(`callback:${ip}`, {
+    maxRequests: 3,
+    windowMs: 60 * 60 * 1000, // 1 час
+    message: 'Слишком много запросов на обратный звонок. Пожалуйста, попробуйте позже.'
+  });
+
+  if (!limitCheck.allowed) {
+    return NextResponse.json(
+      { 
+        error: limitCheck.message,
+        retryAfter: Math.ceil((limitCheck.resetTime - Date.now()) / 1000)
+      },
+      { 
+        status: 429,
+        headers: {
+          'Retry-After': String(Math.ceil((limitCheck.resetTime - Date.now()) / 1000))
+        }
+      }
+    );
+  }
+
   try {
     const { name, phone } = await request.json();
 
@@ -23,8 +48,8 @@ export async function POST(request) {
           
           <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
             <h3 style="color: #333; margin-top: 0;">Данные клиента:</h3>
-            <p><strong>Имя:</strong> ${name}</p>
-            <p><strong>Телефон:</strong> ${phone}</p>
+            <p><strong>Имя:</strong> ${sanitizeHtml(name)}</p>
+            <p><strong>Телефон:</strong> ${sanitizeHtml(phone)}</p>
             <p><strong>Дата заявки:</strong> ${new Date().toLocaleString('ru-RU')}</p>
           </div>
           

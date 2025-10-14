@@ -1,8 +1,34 @@
 import { NextResponse } from 'next/server';
 import { getDbPool, initSchema } from '../../../lib/db';
 import { sendOrderEmail } from '../../../lib/email';
+import { sanitizeHtml } from '../../../lib/auth';
+import { checkRateLimit, getClientIp } from '../../../lib/rate-limit';
 
 export async function POST(request) {
+  // Rate limiting: макс 5 заказов в час с одного IP
+  const ip = getClientIp(request);
+  const limitCheck = checkRateLimit(`order:${ip}`, {
+    maxRequests: 5,
+    windowMs: 60 * 60 * 1000, // 1 час
+    message: 'Слишком много заказов. Пожалуйста, попробуйте позже.'
+  });
+
+  if (!limitCheck.allowed) {
+    return NextResponse.json(
+      { 
+        error: limitCheck.message,
+        retryAfter: Math.ceil((limitCheck.resetTime - Date.now()) / 1000)
+      },
+      { 
+        status: 429,
+        headers: {
+          'Retry-After': String(Math.ceil((limitCheck.resetTime - Date.now()) / 1000))
+        }
+      }
+    );
+  }
+  
+
   try {
     console.log('🔍 API: Начинаем создание заказа...');
     
@@ -94,9 +120,9 @@ export async function POST(request) {
         try {
           const html = `
             <h2>Новый заказ #${orderId}</h2>
-            <p><strong>Клиент:</strong> ${customer.firstName || ''} ${customer.lastName || ''}</p>
-            <p><strong>Email:</strong> ${customer.email}</p>
-            <p><strong>Телефон:</strong> ${customer.phone || ''}</p>
+            <p><strong>Клиент:</strong> ${sanitizeHtml(customer.firstName || '')} ${sanitizeHtml(customer.lastName || '')}</p>
+            <p><strong>Email:</strong> ${sanitizeHtml(customer.email)}</p>
+            <p><strong>Телефон:</strong> ${sanitizeHtml(customer.phone || '')}</p>
             <p><strong>Способ доставки:</strong> ${customer.deliveryMethod === 'cdek' ? 'СДЭК' : 
                                                     customer.deliveryMethod === 'post' ? 'Почта России' : 
                                                     customer.deliveryMethod === 'express' ? 'Экспресс доставка по Санкт-Петербургу' : 
@@ -104,15 +130,15 @@ export async function POST(request) {
             <p><strong>${customer.deliveryMethod === 'cdek' ? 'Адрес пункта выдачи СДЭК' : 
                          customer.deliveryMethod === 'post' ? 'Адрес доставки' : 
                          customer.deliveryMethod === 'express' ? 'Адрес экспресс доставки' : 
-                         'Адрес'}:</strong> ${customer.address || ''}</p>
-            ${customer.deliveryMethod === 'post' && customer.postIndex ? `<p><strong>Почтовый индекс:</strong> ${customer.postIndex}</p>` : ''}
+                         'Адрес'}:</strong> ${sanitizeHtml(customer.address || '')}</p>
+            ${customer.deliveryMethod === 'post' && customer.postIndex ? `<p><strong>Почтовый индекс:</strong> ${sanitizeHtml(customer.postIndex)}</p>` : ''}
             <p><strong>Способ оплаты:</strong> ${customer.paymentMethod === 'card' ? 'Банковская карта' : 
                                                   customer.paymentMethod === 'sbp' ? 'СБП (Система Быстрых Платежей)' : 
                                                   customer.paymentMethod === 'cash' ? 'Наличными при получении' : 
                                                   'Не указан'}</p>
-            ${customer.notes ? `<p><strong>Комментарий к заказу:</strong> ${customer.notes}</p>` : ''}
+            ${customer.notes ? `<p><strong>Комментарий к заказу:</strong> ${sanitizeHtml(customer.notes)}</p>` : ''}
             <h3>Товары:</h3>
-            ${items.map(i => `<div style="margin:8px 0;">${i.title || i.name} — ${i.quantity} шт. × ${i.unitPrice || i.price} ₽</div>`).join('')}
+            ${items.map(i => `<div style="margin:8px 0;">${sanitizeHtml(i.title || i.name)} — ${i.quantity} шт. × ${i.unitPrice || i.price} ₽</div>`).join('')}
             <h3>Итого: ${total} ₽</h3>
           `;
 

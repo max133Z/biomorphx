@@ -1,8 +1,13 @@
 import { NextResponse } from 'next/server';
 import { getDbPool } from '../../../../lib/db';
 import { sendOrderEmail } from '../../../../lib/email';
+import { checkAdminAuth, sanitizeHtml } from '../../../../lib/auth';
 
 export async function POST(request) {
+  // Проверка авторизации
+  const authError = checkAdminAuth(request);
+  if (authError) return authError;
+
   try {
     const { orderId } = await request.json();
     if (!orderId) {
@@ -19,12 +24,12 @@ export async function POST(request) {
 
     const html = `
       <h2>Информация о заказе #${orderId}</h2>
-      <p><strong>Клиент:</strong> ${order.customer_name || ''}</p>
-      <p><strong>Email:</strong> ${order.customer_email}</p>
-      <p><strong>Телефон:</strong> ${order.customer_phone || ''}</p>
-      <p><strong>Адрес:</strong> ${order.shipping_address || ''}</p>
+      <p><strong>Клиент:</strong> ${sanitizeHtml(order.customer_name || '')}</p>
+      <p><strong>Email:</strong> ${sanitizeHtml(order.customer_email)}</p>
+      <p><strong>Телефон:</strong> ${sanitizeHtml(order.customer_phone || '')}</p>
+      <p><strong>Адрес:</strong> ${sanitizeHtml(order.shipping_address || '')}</p>
       <h3>Товары:</h3>
-      ${items.map(i => `<div style="margin:8px 0;">${i.title} — ${i.quantity} шт. × ${i.unit_price} ₽</div>`).join('')}
+      ${items.map(i => `<div style="margin:8px 0;">${sanitizeHtml(i.title)} — ${i.quantity} шт. × ${i.unit_price} ₽</div>`).join('')}
       <h3>Итого: ${order.total_price} ₽</h3>
     `;
 

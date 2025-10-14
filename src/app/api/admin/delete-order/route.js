@@ -1,7 +1,12 @@
 import { NextResponse } from 'next/server';
 import { getDbPool } from '../../../../lib/db';
+import { checkAdminAuth } from '../../../../lib/auth';
 
 export async function DELETE(request) {
+  // Проверка авторизации
+  const authError = checkAdminAuth(request);
+  if (authError) return authError;
+
   try {
     const { orderId } = await request.json();
 

@@ -1,8 +1,34 @@
 import { NextResponse } from 'next/server';
 import { getDbPool, initSchema } from '../../../lib/db';
 import { sendContactEmail } from '../../../lib/email';
+import { sanitizeHtml, isValidEmail, isValidPhone, limitLength } from '../../../lib/auth';
+import { checkRateLimit, getClientIp } from '../../../lib/rate-limit';
 
 export async function POST(request) {
+  // Rate limiting: макс 3 сообщения в час с одного IP
+  const ip = getClientIp(request);
+  const limitCheck = checkRateLimit(`contact:${ip}`, {
+    maxRequests: 3,
+    windowMs: 60 * 60 * 1000, // 1 час
+    message: 'Слишком много сообщений. Пожалуйста, попробуйте позже.'
+  });
+
+  if (!limitCheck.allowed) {
+    return NextResponse.json(
+      { 
+        error: limitCheck.message,
+        retryAfter: Math.ceil((limitCheck.resetTime - Date.now()) / 1000)
+      },
+      { 
+        status: 429,
+        headers: {
+          'Retry-After': String(Math.ceil((limitCheck.resetTime - Date.now()) / 1000))
+        }
+      }
+    );
+  }
+  
+
   try {
     const body = await request.json();
     const { name, email, phone, message } = body;
@@ -12,11 +38,21 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Пожалуйста, заполните все обязательные поля' }, { status: 400 });
     }
 
-    // Простая валидация email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    // Валидация email
+    if (!isValidEmail(email)) {
       return NextResponse.json({ error: 'Пожалуйста, введите корректный email' }, { status: 400 });
     }
+
+    // Валидация телефона
+    if (phone && !isValidPhone(phone)) {
+      return NextResponse.json({ error: 'Неверный формат телефона' }, { status: 400 });
+    }
+
+    // Ограничение длины
+    const safeName = limitLength(name, 255);
+    const safeEmail = limitLength(email, 255);
+    const safePhone = limitLength(phone, 64);
+    const safeMessage = limitLength(message, 5000);
 
     await initSchema();
 
@@ -26,11 +62,11 @@ export async function POST(request) {
     try {
       await conn.beginTransaction();
 
-      // Сохраняем письмо в базу данных
+      // Сохраняем письмо в базу данных (уже санитизированные данные)
       const [result] = await conn.query(
         `INSERT INTO contact_emails (name, email, phone, message)
          VALUES (?, ?, ?, ?)`,
-        [name, email, phone || null, message]
+        [safeName, safeEmail, safePhone || null, safeMessage]
       );
 
       await conn.commit();
@@ -39,11 +75,11 @@ export async function POST(request) {
       if (process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_FROM) {
         const html = `
           <h2>Новое сообщение с сайта</h2>
-          <p><strong>От:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Телефон:</strong> ${phone || 'Не указан'}</p>
+          <p><strong>От:</strong> ${sanitizeHtml(safeName)}</p>
+          <p><strong>Email:</strong> ${sanitizeHtml(safeEmail)}</p>
+          <p><strong>Телефон:</strong> ${sanitizeHtml(safePhone || 'Не указан')}</p>
           <h3>Сообщение:</h3>
-          <p>${message}</p>
+          <p>${sanitizeHtml(safeMessage)}</p>
         `;
 
         await sendContactEmail({

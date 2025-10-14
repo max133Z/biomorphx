@@ -1,7 +1,12 @@
 import { NextResponse } from 'next/server';
 import { getDbPool, initSchema } from '../../../../lib/db';
+import { checkAdminAuth } from '../../../../lib/auth';
 
-export async function GET() {
+export async function GET(request) {
+  // Проверка авторизации
+  const authError = checkAdminAuth(request);
+  if (authError) return authError;
+
   try {
     console.log('🔍 API: Начинаем получение заказов для админ панели...');
     

@@ -16,41 +16,35 @@ export default function AdminPanel() {
   const router = useRouter();
 
   useEffect(() => {
-    // Проверяем, авторизован ли пользователь
-    const auth = localStorage.getItem('adminAuth');
-    if (auth) {
-      setIsAuthenticated(true);
-      fetchOrders();
-      fetchEmails();
-    }
+    // Проверяем, авторизован ли пользователь через Basic Auth
+    // Middleware уже проверил авторизацию, если мы здесь - значит авторизованы
+    setIsAuthenticated(true);
+    fetchOrders();
+    fetchEmails();
   }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const correctUsername = process.env.NEXT_PUBLIC_ADMIN_USER || 'admin';
-    const correctPassword = process.env.NEXT_PUBLIC_ADMIN_PASS || 'rtGBYU174@#';
-    
-    if (username === correctUsername && password === correctPassword) {
-      setIsAuthenticated(true);
-      localStorage.setItem('adminAuth', 'true');
-      fetchOrders();
-    } else {
-      alert('Неверные учетные данные');
-    }
+    // Авторизация через middleware (Basic Auth)
+    // Форма оставлена для совместимости, но реальная проверка на сервере
+    alert('Используйте авторизацию через HTTP Basic Auth');
   };
 
   const handleLogout = () => {
-    setIsAuthenticated(false);
-    localStorage.removeItem('adminAuth');
-    setUsername('');
-    setPassword('');
+    // Для выхода пользователь должен закрыть браузер или очистить Basic Auth
+    alert('Для выхода закройте браузер или очистите данные сайта');
+    router.push('/');
   };
 
   const fetchOrders = async () => {
     setLoading(true);
     try {
       console.log('🔍 Админ: Запрашиваем заказы...');
-      const response = await fetch('/api/admin/orders');
+      
+      // Basic Auth уже в заголовках браузера (middleware проверяет при каждом запросе)
+      const response = await fetch('/api/admin/orders', {
+        credentials: 'include' // Включаем авторизационные заголовки
+      });
       console.log('📊 Админ: Статус ответа:', response.status);
       
       if (response.ok) {
@@ -80,7 +74,9 @@ export default function AdminPanel() {
   const fetchEmails = async () => {
     setLoading(true);
     try {
-      const response = await fetch('/api/admin/emails');
+      const response = await fetch('/api/admin/emails', {
+        credentials: 'include'
+      });
       if (response.ok) {
         const data = await response.json();
         setEmails(data.emails || []);
@@ -101,6 +97,7 @@ export default function AdminPanel() {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({ orderId, status: newStatus }),
       });
 
@@ -126,6 +123,7 @@ export default function AdminPanel() {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({ orderId }),
       });
 
@@ -145,6 +143,7 @@ export default function AdminPanel() {
     try {
       const response = await fetch('/api/admin/send-email', {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
