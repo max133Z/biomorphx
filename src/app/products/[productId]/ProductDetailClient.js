@@ -1,25 +1,26 @@
 "use client";
 
 import { useState } from "react";
-import products from "../../../data/products";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import ImageModal from "../../../components/ImageModal";
 import { useCart } from "../../../contexts/CartContext";
 
-export default function ProductDetailPage({ params }) {
-  const { productId } = params;
-  const product = products.find((p) => p.id === productId);
+export default function ProductDetailClient({ product }) {
   const { addToCart } = useCart();
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
   if (!product) {
     return (
-      <div className="container" style={{paddingTop: '200px', textAlign: 'center'}}>
-        <h1>Продукт не найден</h1>
-        <p>К сожалению, мы не смогли найти продукт с ID: {productId}.</p>
-        <a href="/products" className="btn" style={{marginTop: '20px'}}>Вернуться к продуктам</a>
-      </div>
+      <>
+        <Header />
+        <div className="container" style={{paddingTop: '200px', textAlign: 'center'}}>
+          <h1>Продукт не найден</h1>
+          <p>К сожалению, продукт не найден.</p>
+          <a href="/products" className="btn" style={{marginTop: '20px'}}>Вернуться к продуктам</a>
+        </div>
+        <Footer />
+      </>
     );
   }
 
@@ -62,8 +63,6 @@ export default function ProductDetailPage({ params }) {
               </div>
             )}
 
-
-
             {product.recommendedDose && (
               <div className="product-recommendations">
                 <h3>Рекомендуемая доза:</h3>
@@ -90,7 +89,9 @@ export default function ProductDetailPage({ params }) {
             </div>
 
             <div className="add-to-cart">
-              <button className="btn" onClick={() => addToCart(product)}><i className="fas fa-cart-plus"></i> Добавить в корзину</button>
+              <button className="btn" onClick={() => addToCart(product)}>
+                <i className="fas fa-cart-plus"></i> Добавить в корзину
+              </button>
             </div>
           </div>
         </div>
@@ -107,3 +108,4 @@ export default function ProductDetailPage({ params }) {
     </>
   );
 }
+

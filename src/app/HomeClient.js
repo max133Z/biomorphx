@@ -1,17 +1,16 @@
 "use client";
 
-import { useState } from "react";
-import products from "../data/products"; // Импортируем данные о продуктах
-import reviews from "../data/reviews"; // Импортируем данные о отзывах
-import ProductCard from "../components/ProductCard"; // Импортируем компонент ProductCard
-import ReviewCard from "../components/ReviewCard"; // Импортируем компонент ReviewCard
-import Header from "../components/Header"; // Импортируем компонент Header
-import Footer from "../components/Footer"; // Импортируем компонент Footer
+import products from "../data/products";
+import reviews from "../data/reviews";
+import ProductCard from "../components/ProductCard";
+import ReviewCard from "../components/ReviewCard";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import { useCart } from "../contexts/CartContext";
 import WhatsAppWidget from "../components/WhatsAppWidget";
 import "./styles/pages/home-mobile.css";
 
-export default function Home() {
+export default function HomeClient() {
   const { addToCart } = useCart();
 
   return (
@@ -29,13 +28,11 @@ export default function Home() {
               </div>
             </div>
             <div className="hero-image">
-              <img src="/img/image_1.jpg" alt="hero image"/> {/* Обновляю путь к изображению */}
+              <img src="/img/image_1.jpg" alt="hero image"/>
             </div>
           </div>
         </div>
       </section>
-
-
 
       <section className="products home-products">
         <div className="container">
@@ -86,7 +83,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Новая секция статей (2 карточки по центру) */}
+      {/* Секция статей */}
       <section className="articles-mini">
         <div className="container">
           <div className="section-title">
@@ -133,3 +130,4 @@ export default function Home() {
     </>
   );
 }
+

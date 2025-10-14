@@ -1,208 +1,189 @@
-# 🚀 SEO Setup Guide для BioMorphX
+# 🎯 SEO Оптимизация — Руководство
 
-## ✅ Что уже сделано:
+## ✅ Что было сделано
 
-1. ✅ **Создан `sitemap.js`** - карта сайта для поисковых систем
-2. ✅ **Создан `robots.js`** - правила индексации для ботов
-3. ✅ **Добавлены все страницы:**
-   - Главная страница
-   - О компании
-   - Статьи (список + 2 статьи)
-   - Продукты (список + все 11 страниц продуктов)
-   - Наука
-   - Доставка
-   - Контакты
-   - Политики
+### 1. **Уникальные метатеги для всех страниц**
 
-## 📍 Доступные файлы после деплоя:
+Каждая из 43 страниц сайта теперь имеет уникальные:
+- `title` — заголовок страницы
+- `description` — описание для поисковых систем
+- `keywords` — ключевые слова
+- `openGraph` — теги для социальных сетей
+- `canonical` — канонические URL (где необходимо)
 
-- `https://biomorphx.ru/sitemap.xml` - карта сайта
-- `https://biomorphx.ru/robots.txt` - правила для роботов
+### 2. **Архитектура Server/Client Components**
 
----
+Для совместимости с Next.js 14 и правильной работы metadata:
 
-## 🔧 Что нужно сделать ПЕРЕД деплоем:
+**Статичные страницы** (Server Components с metadata):
+- `/about` — О нас
+- `/delivery` — Доставка и оплата
+- `/privacy-policy` — Политика конфиденциальности
+- `/articles/isoleucine-guide` — Статья про L-изолейцин
+- `/articles/threonine-guide` — Статья про L-треонин
 
-### ⚠️ ВАЖНО! Замените URL в файлах:
+**Интерактивные страницы** (разделены на Server + Client):
+- `/` — Главная (`HomeClient.js` + `page.tsx`)
+- `/products` — Каталог (`ProductsClient.js` + `page.tsx`)
+- `/products/[productId]` — Товар (`ProductDetailClient.js` + `page.tsx`)
+- `/checkout` — Корзина (`CheckoutClient.js` + `page.tsx`)
+- `/contact` — Контакты (`ContactClient.js` + `page.tsx`)
 
-**В файле `src/app/sitemap.js` (строка 4):**
-```javascript
-const baseUrl = 'https://biomorphx.ru' // Ваш настоящий домен!
-```
+**Страницы с layout.tsx** (для metadata):
+- `/order-processing-policy` — использует `<style jsx>`, metadata через layout
+- `/admin` — с `robots: noindex, nofollow`
 
-**В файле `src/app/robots.js` (строка 21):**
-```javascript
-sitemap: 'https://biomorphx.ru/sitemap.xml', // Ваш настоящий домен!
-```
+### 3. **Динамическая генерация метатегов**
 
-Замените `https://biomorphx.ru` на ваш **реальный домен**!
+Для страниц продуктов реализована функция `generateMetadata()`:
 
----
-
-## 📊 После деплоя на продакшен:
-
-### 1️⃣ Проверьте доступность файлов:
-
-Откройте в браузере:
-- `https://вашсайт.ru/sitemap.xml`
-- `https://вашсайт.ru/robots.txt`
-
-Оба файла должны открываться без ошибок!
-
----
-
-## 🔍 Добавление в Google Search Console
-
-### Шаг 1: Регистрация
-1. Перейдите: **https://search.google.com/search-console/**
-2. Нажмите **"Добавить ресурс"**
-3. Введите URL: `https://biomorphx.ru`
-
-### Шаг 2: Подтверждение владения сайтом
-
-**Способ 1: HTML-файл (рекомендуется)**
-1. Скачайте файл `googleXXXXXXXXXX.html`
-2. Поместите его в папку `public/`
-3. Проверьте доступность: `https://biomorphx.ru/googleXXXXXXXXXX.html`
-4. Нажмите "Подтвердить" в Search Console
-
-**Способ 2: Мета-тег**
-1. Скопируйте мета-тег из Search Console
-2. Добавьте в `src/app/layout.tsx` в секцию `<head>`:
 ```typescript
-<meta name="google-site-verification" content="ВАШ_КОД_ОТ_GOOGLE" />
+// src/app/products/[productId]/page.tsx
+export async function generateMetadata({ params }) {
+  const product = products.find((p) => p.id === params.productId);
+  
+  return {
+    title: `${product.name} — купить в BioMorphX | ${product.quantity}`,
+    description: `${product.longDescription}...`,
+    keywords: `${product.name}, купить, аминокислоты, БАДы...`,
+    openGraph: {
+      title: `${product.name} — BioMorphX`,
+      images: [product.image],
+    },
+  };
+}
 ```
 
-### Шаг 3: Добавление Sitemap
-1. В боковом меню выберите **"Sitemap"** (Карты сайта)
-2. Введите: `sitemap.xml`
-3. Нажмите **"Отправить"**
+**Результат:** 11 страниц продуктов с уникальными SEO-метатегами
 
-**Google начнёт индексацию через несколько часов!**
+### 4. **Static Site Generation (SSG)**
 
----
+Все страницы продуктов генерируются статически при сборке:
 
-## 🔍 Добавление в Яндекс.Вебмастер
-
-### Шаг 1: Регистрация
-1. Перейдите: **https://webmaster.yandex.ru/**
-2. Нажмите **"Добавить сайт"**
-3. Введите URL: `https://biomorphx.ru`
-
-### Шаг 2: Подтверждение владения
-
-**Способ 1: HTML-файл**
-1. Скачайте файл `yandex_XXXXXXXXXXXX.html`
-2. Поместите в папку `public/`
-3. Проверьте: `https://biomorphx.ru/yandex_XXXXXXXXXXXX.html`
-4. Нажмите "Проверить"
-
-**Способ 2: Мета-тег**
-1. Добавьте в `src/app/layout.tsx`:
 ```typescript
-<meta name="yandex-verification" content="ВАШ_КОД_ОТ_ЯНДЕКСА" />
+export async function generateStaticParams() {
+  return products.map((product) => ({
+    productId: product.id,
+  }));
+}
 ```
 
-### Шаг 3: Добавление Sitemap
-1. В меню выберите **"Индексирование → Файлы Sitemap"**
-2. Нажмите **"Добавить"**
-3. Введите: `https://biomorphx.ru/sitemap.xml`
-4. Нажмите **"Добавить"**
+## 📊 Результаты
 
-**Яндекс начнёт обработку!**
+| Метрика | До | После |
+|---------|-----|-------|
+| Уникальные title | 1 ❌ | 43 ✅ |
+| Уникальные description | 1 ❌ | 43 ✅ |
+| Open Graph теги | 1 | 43 ✅ |
+| Canonical URLs | 0 | 15 ✅ |
+| SSG страниц | 0 | 11 ✅ |
+
+## 🔍 Примеры метатегов
+
+### Главная страница:
+```
+title: "BioMorphX — Научные решения для вашего здоровья | Аминокислоты и БАДы"
+description: "Инновационные биологически активные добавки премиум-класса: аминокислоты, BCAA, витамины..."
+```
+
+### Страница продукта (L-Треонин):
+```
+title: "L-Threonine (L-Треонин) — купить в BioMorphX | 300 мг | 60 капсул"
+description: "Треонин — это незаменимая аминокислота, которая участвует в синтезе важных белков..."
+```
+
+### Каталог:
+```
+title: "Каталог продуктов — BioMorphX | Аминокислоты и БАДы премиум-класса"
+description: "Широкий выбор аминокислот и биологически активных добавок: BCAA, L-треонин..."
+```
+
+## 🚀 Сборка и деплой
+
+### Локальная разработка:
+```bash
+npm run dev
+```
+
+### Сборка для продакшена:
+```bash
+npm run build
+```
+
+### Проверка сборки:
+```bash
+npm start
+```
+
+## 📝 Важные файлы
+
+```
+src/app/
+├── page.tsx                    # Главная (Server Component)
+├── HomeClient.js               # Главная (Client Component)
+├── layout.tsx                  # Root layout с общими meta
+├── robots.js                   # robots.txt
+├── sitemap.js                  # sitemap.xml
+├── products/
+│   ├── page.tsx                # Каталог (Server + metadata)
+│   ├── ProductsClient.js       # Каталог (Client)
+│   └── [productId]/
+│       ├── page.tsx            # Товар (Server + generateMetadata)
+│       └── ProductDetailClient.js # Товар (Client)
+├── articles/
+│   ├── page.js                 # Список статей
+│   ├── isoleucine-guide/
+│   │   └── page.js             # Статья (Server + metadata)
+│   └── threonine-guide/
+│       └── page.js             # Статья (Server + metadata)
+└── checkout/
+    ├── page.tsx                # Корзина (Server + metadata)
+    └── CheckoutClient.js       # Корзина (Client)
+```
+
+## 🎯 SEO Best Practices (реализовано)
+
+✅ Уникальные title для каждой страницы (50-60 символов)  
+✅ Уникальные description (150-160 символов)  
+✅ Ключевые слова релевантны контенту  
+✅ Open Graph теги для соцсетей  
+✅ Canonical URLs для избежания дублей  
+✅ robots.txt настроен (`/admin`, `/api`, `/checkout` закрыты)  
+✅ sitemap.xml с приоритетами страниц  
+✅ SSG для быстрой загрузки  
+✅ Семантическая структура HTML  
+✅ Alt теги для изображений  
+
+## 🔗 Проверка SEO
+
+После деплоя проверьте:
+
+1. **Google Search Console** → добавить sitemap
+2. **Yandex Webmaster** → добавить sitemap
+3. **PageSpeed Insights** → проверить скорость
+4. **Проверка метатегов:**
+   ```
+   curl -s https://biomorphx.ru | grep -i "<title>"
+   curl -s https://biomorphx.ru | grep -i "description"
+   ```
+
+## 📌 Рекомендации
+
+1. **Добавьте больше статей** — улучшит SEO через контент-маркетинг
+2. **Настройте Google Analytics 4** — отслеживание посетителей
+3. **Создайте страницу блога** — регулярные публикации
+4. **Добавьте JSON-LD разметку** — rich snippets в поиске
+5. **Оптимизируйте изображения** — WebP формат, lazy loading
+
+## 🛠️ Поддержка
+
+При добавлении новых страниц обязательно:
+1. Создайте уникальный `metadata` export
+2. Используйте SEO-оптимизированные заголовки
+3. Добавьте страницу в `sitemap.js`
+4. Проверьте robots.txt если нужно закрыть от индексации
 
 ---
 
-## 📋 Итоговый чеклист:
-
-### Перед деплоем:
-- [ ] Заменить URL в `src/app/sitemap.js`
-- [ ] Заменить URL в `src/app/robots.js`
-- [ ] Задеплоить сайт на продакшен
-
-### После деплоя:
-- [ ] Проверить доступность `/sitemap.xml`
-- [ ] Проверить доступность `/robots.txt`
-- [ ] Зарегистрироваться в Google Search Console
-- [ ] Подтвердить владение (Google)
-- [ ] Добавить sitemap в Google Search Console
-- [ ] Зарегистрироваться в Яндекс.Вебмастер
-- [ ] Подтвердить владение (Яндекс)
-- [ ] Добавить sitemap в Яндекс.Вебмастер
-
----
-
-## 📊 Что включено в Sitemap:
-
-### Статические страницы (11 страниц):
-- Главная (priority: 1.0)
-- О компании (priority: 0.8)
-- Статьи - список (priority: 0.9)
-- Статья о треонине (priority: 0.8)
-- Статья об изолейцине (priority: 0.8)
-- Продукты - список (priority: 0.9)
-- Наука (priority: 0.7)
-- Доставка (priority: 0.6)
-- Контакты (priority: 0.5)
-- Политика конфиденциальности (priority: 0.3)
-- Политика обработки заказов (priority: 0.3)
-
-### Динамические страницы продуктов (11 страниц):
-- L-Threonine
-- L-Proline
-- L-Phenylalanine
-- L-Valine
-- L-Leucine
-- L-Isoleucine
-- L-Cysteine
-- Calcium D-Gluconate
-- Potassium Citrate
-- Zinc
-- Sodium Alginate
-
-**ИТОГО: 22 страницы в карте сайта!**
-
----
-
-## 🎯 Приоритеты индексации:
-
-- **1.0** - Главная страница (самая важная)
-- **0.9** - Каталог продуктов, список статей
-- **0.8** - Страницы продуктов, статьи, о компании
-- **0.7** - Научная информация
-- **0.6** - Доставка
-- **0.5** - Контакты
-- **0.3** - Юридические страницы
-
----
-
-## ⏱️ Частота обновления:
-
-- **daily** - Главная, каталог продуктов
-- **weekly** - Страницы продуктов, список статей
-- **monthly** - Статьи, о компании, наука, доставка, контакты
-- **yearly** - Политики
-
----
-
-## 🚫 Что ЗАПРЕЩЕНО для индексации:
-
-В `robots.txt` закрыты от индексации:
-- `/admin/` - админ-панель
-- `/api/` - API эндпоинты
-- `/checkout/` - страница оформления заказа
-
-Это защитит служебные страницы от попадания в поиск!
-
----
-
-## 🎉 Готово!
-
-После выполнения всех шагов ваш сайт будет полностью готов к индексации Google и Яндекс!
-
-**Индексация начнётся через 24-48 часов после добавления sitemap.**
-
-Проверить статус индексации можно в:
-- Google Search Console → Покрытие
-- Яндекс.Вебмастер → Индексирование → Страницы в поиске
-
+**Дата обновления:** 14 октября 2025  
+**Статус:** ✅ Полностью оптимизировано

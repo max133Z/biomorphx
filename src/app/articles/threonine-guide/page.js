@@ -3,6 +3,21 @@ import Link from 'next/link';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
 
+export const metadata = {
+  title: 'Что такое треонин? 7 важных фактов о L-треонине — BioMorphX',
+  description: 'Полное руководство по L-треонину: что это, зачем нужен, признаки дефицита, источники в продуктах, дозировка и побочные эффекты. Научно обоснованная информация.',
+  keywords: 'L-треонин, треонин, незаменимая аминокислота, польза треонина, дефицит треонина, дозировка треонина, продукты с треонином',
+  openGraph: {
+    title: 'Что такое треонин? 7 важных фактов — BioMorphX',
+    description: '7 важных фактов о L-треонине, которые нужно знать каждому',
+    type: 'article',
+    images: ['/img/for state_1.png'],
+  },
+  alternates: {
+    canonical: '/articles/threonine-guide',
+  },
+};
+
 export default function ThreonineGuidePage() {
   const tableOfContents = [
     { id: 'what-is-threonine', title: 'Что такое треонин?' },
@@ -204,10 +219,7 @@ export default function ThreonineGuidePage() {
                   <h3>Популярные статьи</h3>
                   <ul className="sidebar-articles">
                     <li>
-                      <Link href="/articles/bcaa-science">Роль BCAA в наборе мышечной массы</Link>
-                    </li>
-                    <li>
-                      <Link href="/articles/creatine-myths">Креатин: мифы и факты</Link>
+                      <Link href="/articles/isoleucine-guide">L-изолейцин: энергия и восстановление</Link>
                     </li>
                   </ul>
                 </div>

@@ -4,7 +4,7 @@ import { useState } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
-export default function Contact() {
+export default function ContactClient() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -50,6 +50,7 @@ export default function Contact() {
       [e.target.name]: e.target.value
     });
   };
+
   return (
     <>
       <Header />
@@ -199,3 +200,4 @@ export default function Contact() {
     </>
   );
 }
+

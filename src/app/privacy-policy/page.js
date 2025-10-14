@@ -1,6 +1,17 @@
 import React from 'react';
 import Link from 'next/link';
 
+export const metadata = {
+  title: 'Политика конфиденциальности — BioMorphX | Защита персональных данных',
+  description: 'Политика конфиденциальности и обработки персональных данных BioMorphX. Как мы собираем, используем и защищаем вашу информацию. Соответствие 152-ФЗ.',
+  keywords: 'политика конфиденциальности, персональные данные, 152-ФЗ, защита данных, обработка данных',
+  openGraph: {
+    title: 'Политика конфиденциальности — BioMorphX',
+    description: 'Как мы защищаем ваши персональные данные',
+    type: 'website',
+  },
+};
+
 export default function PrivacyPolicy() {
   return (
     <div className="privacy-policy-page">

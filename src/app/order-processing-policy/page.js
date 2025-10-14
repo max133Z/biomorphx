@@ -3,6 +3,9 @@
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
+// Note: Используется <style jsx>, поэтому нужен "use client"
+// Metadata перенесена в layout.tsx
+
 export default function OrderProcessingPolicy() {
   return (
     <>

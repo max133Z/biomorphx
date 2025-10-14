@@ -1,7 +1,16 @@
-"use client";
-
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+
+export const metadata = {
+  title: 'О нас — BioMorphX | Научный подход к здоровью',
+  description: 'BioMorphX — команда профессионалов, создающих инновационные биологически активные добавки на основе научных исследований. Эффективность, стильный дизайн и открытость.',
+  keywords: 'о нас, BioMorphX, биологически активные добавки, научный подход, команда, миссия, производство БАДов',
+  openGraph: {
+    title: 'О нас — BioMorphX',
+    description: 'Узнайте о команде BioMorphX и нашем научном подходе к созданию БАДов',
+    type: 'website',
+  },
+};
 
 export default function About() {
   return (

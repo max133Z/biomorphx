@@ -7,7 +7,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Link from 'next/link';
 
-const CheckoutPage = () => {
+const CheckoutClient = () => {
   const {
     items,
     getTotalPrice,
@@ -110,10 +110,10 @@ const CheckoutPage = () => {
           address: formData.deliveryMethod === 'cdek' ? formData.cdekAddress :
                   formData.deliveryMethod === 'post' ? formData.postAddress :
                   formData.expressAddress,
-          postIndex: formData.deliveryMethod === 'post' ? formData.postIndex : null, // Отдельно индекс для Почты России
+          postIndex: formData.deliveryMethod === 'post' ? formData.postIndex : null,
           deliveryMethod: formData.deliveryMethod,
-          paymentMethod: formData.paymentMethod, // Добавляем способ оплаты
-          notes: formData.notes || '' // Добавляем комментарий к заказу
+          paymentMethod: formData.paymentMethod,
+          notes: formData.notes || ''
         },
         items: items.map(item => ({
           productId: item.id,
@@ -610,4 +610,5 @@ const CheckoutPage = () => {
   );
 };
 
-export default CheckoutPage;
+export default CheckoutClient;
+

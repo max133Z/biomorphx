@@ -2,6 +2,21 @@ import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
 import '../../styles/pages/article-page.css';
 
+export const metadata = {
+  title: 'L-изолейцин: полное руководство | Польза, дозировка, применение — BioMorphX',
+  description: 'Всё о L-изолейцине: незаменимая аминокислота для спортсменов. Польза для роста мышц, энергии и восстановления. Научно обоснованная информация о дозировках и применении.',
+  keywords: 'L-изолейцин, изолейцин, BCAA, аминокислоты для спорта, рост мышц, восстановление, спортивное питание, энергия',
+  openGraph: {
+    title: 'L-изолейцин: полное руководство | BioMorphX',
+    description: 'Научное руководство по L-изолейцину: польза, дозировки, применение для спортсменов',
+    type: 'article',
+    images: ['/img/for state_2.png'],
+  },
+  alternates: {
+    canonical: '/articles/isoleucine-guide',
+  },
+};
+
 export default function IsoleucineGuidePage() {
   return (
     <>
@@ -218,7 +233,16 @@ export default function IsoleucineGuidePage() {
           {/* Боковая панель */}
           <aside className="article-sidebar">
             <div className="sidebar-card">
-              <h3>Наши основные продукты</h3>
+              <h3>Популярные статьи</h3>
+              <ul className="sidebar-articles">
+                <li>
+                  <a href="/articles/threonine-guide">Что такое треонин? 7 важных фактов</a>
+                </li>
+              </ul>
+            </div>
+            
+            <div className="sidebar-card">
+              <h3>Связанные продукты</h3>
               <a href="/products/l-threonine" className="product-card product-card-clickable">
                 <img src="/img/L-Threonine.png" alt="L-Threonine" />
                 <h4>L-Threonine</h4>

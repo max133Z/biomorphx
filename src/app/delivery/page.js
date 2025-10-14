@@ -1,7 +1,16 @@
-"use client";
-
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+
+export const metadata = {
+  title: 'Доставка и оплата — BioMorphX | СДЭК, Почта России, Экспресс СПб',
+  description: 'Удобная доставка БАДов и аминокислот: СДЭК по всей России, Почта России, бесплатная экспресс-доставка по Санкт-Петербургу. Оплата картой, СБП или наличными.',
+  keywords: 'доставка БАДов, доставка аминокислот, СДЭК, Почта России, оплата СБП, доставка спортпита, доставка Санкт-Петербург',
+  openGraph: {
+    title: 'Доставка и оплата — BioMorphX',
+    description: 'Быстрая доставка по всей России. Несколько способов оплаты',
+    type: 'website',
+  },
+};
 
 export default function Delivery() {
   return (
