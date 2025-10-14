@@ -13,9 +13,15 @@ export async function POST(request) {
   });
 
   if (!limitCheck.allowed) {
+    const retryMinutes = Math.ceil((limitCheck.resetTime - Date.now()) / 1000 / 60);
     return NextResponse.json(
       { 
-        error: limitCheck.message,
+        error: '⏱️ Превышен лимит запросов',
+        message: `Вы отправили много запросов на обратный звонок. Пожалуйста, подождите ${retryMinutes} мин. или позвоните нам прямо сейчас!`,
+        contact: {
+          phone: '+7 999 041 37 55',
+          text: 'Звоните — мы уже готовы с вами пообщаться 😊'
+        },
         retryAfter: Math.ceil((limitCheck.resetTime - Date.now()) / 1000)
       },
       { 

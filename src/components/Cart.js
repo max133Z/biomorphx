@@ -118,7 +118,7 @@ const Cart = () => {
               closeCart();
               window.location.href = '/checkout';
             }}>Оформить заказ</button>
-            <a href="/cart" className="view-cart-btn" onClick={closeCart}>
+            <a href="/checkout" className="view-cart-btn" onClick={closeCart}>
               <i className="fas fa-shopping-bag"></i> Полная корзина
             </a>
           </div>

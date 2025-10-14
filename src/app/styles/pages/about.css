@@ -44,11 +44,13 @@
 .about-page-hero .page-hero-content h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  font-weight: 700;
-  background: linear-gradient(45deg, var(--accent) 0%, var(--orange) 100%);
+  font-weight: 800;
+  background: linear-gradient(90deg, #ffffff, var(--accent), var(--secondary));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  background-size: 200% auto;
+  animation: gradientText 8s ease infinite;
   font-family: 'Montserrat Alternates', sans-serif !important;
 }
 

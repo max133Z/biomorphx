@@ -17,7 +17,7 @@ const Footer = () => {
             <h3>Компания</h3>
             <ul>
               <li><a href="/about"><i className="fas fa-users"></i> О нас</a></li>
-              <li><a href="/science"><i className="fas fa-flask"></i> Наука</a></li>
+              <li><a href="/articles"><i className="fas fa-book"></i> Статьи</a></li>
             </ul>
           </div>
           <div className="footer-column">
