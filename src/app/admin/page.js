@@ -44,8 +44,9 @@ export default function AdminPanel() {
       
       if (response.ok) {
         setIsAuthenticated(true);
-        fetchOrders();
-        fetchEmails();
+        // Загружаем данные с теми же учетными данными
+        await fetchOrdersWithAuth(username, password);
+        await fetchEmailsWithAuth(username, password);
       } else {
         alert('Неверные учетные данные');
         setUsername('');
@@ -66,15 +67,13 @@ export default function AdminPanel() {
     setEmails([]);
   };
 
-  const fetchOrders = async () => {
-    if (!username || !password) return;
-    
+  const fetchOrdersWithAuth = async (user, pass) => {
     setLoading(true);
     try {
       console.log('🔍 Админ: Запрашиваем заказы...');
       
-      // Используем сохраненные учетные данные для авторизации
-      const credentials = btoa(`${username}:${password}`);
+      // Используем переданные учетные данные для авторизации
+      const credentials = btoa(`${user}:${pass}`);
       const response = await fetch('/api/admin/orders', {
         headers: {
           'Authorization': `Basic ${credentials}`
@@ -106,12 +105,20 @@ export default function AdminPanel() {
     }
   };
 
+  const fetchOrders = async () => {
+    if (!username || !password) return;
+    await fetchOrdersWithAuth(username, password);
+  };
+
   const fetchEmails = async () => {
     if (!username || !password) return;
-    
+    await fetchEmailsWithAuth(username, password);
+  };
+
+  const fetchEmailsWithAuth = async (user, pass) => {
     setLoading(true);
     try {
-      const credentials = btoa(`${username}:${password}`);
+      const credentials = btoa(`${user}:${pass}`);
       const response = await fetch('/api/admin/emails', {
         headers: {
           'Authorization': `Basic ${credentials}`
