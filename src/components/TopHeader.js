@@ -62,10 +62,10 @@ const TopHeader = () => {
                 <i className="fas fa-map-marker-alt"></i>
                 Санкт-Петербург
               </span>
-              <span className="phone">
+              <a href="tel:+79990413755" className="phone">
                 <i className="fas fa-phone"></i>
                 +7 999 041 37 55
-              </span>
+              </a>
             </div>
             <div className="top-header-right">
               <button 
@@ -212,11 +212,18 @@ const TopHeader = () => {
           align-items: center;
         }
 
-        .top-header-left span {
+        .top-header-left span,
+        .top-header-left a {
           color: rgba(255, 255, 255, 0.8);
           display: flex;
           align-items: center;
           gap: 8px;
+          text-decoration: none;
+          transition: color 0.3s ease;
+        }
+        
+        .top-header-left a:hover {
+          color: var(--accent);
         }
 
         .top-header-left i {

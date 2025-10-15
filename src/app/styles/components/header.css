@@ -2,7 +2,7 @@
 
 header {
     position: fixed;
-    top: 28px; /* Небольшой отступ, чтобы шапки были слитно, но кнопка не перекрывала корзину */
+    top: 28px; /* Отступ для десктопа */
     left: 0;
     width: 100%;
     z-index: 1001; /* Выше TopHeader (z-index: 1000) */
@@ -143,4 +143,11 @@ nav ul li a.active {
 /* Мобильная кнопка корзины — по умолчанию скрыта (включаем в mobile.css) */
 .mobile-cart-top { display: none; }
 .mobile-cart-top-link { text-decoration: none; }
+
+/* Мобильные устройства - меньший отступ */
+@media (max-width: 768px) {
+    header {
+        top: 25px; /* Отступ для мобильных */
+    }
+}
 

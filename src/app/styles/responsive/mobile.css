@@ -147,46 +147,57 @@
 
     /* Кнопка корзины в правом верхнем углу (только мобильные) */
     /* Гарантируем показ кнопки корзины на всех страницах (мобайл) */
-    .header-container { position: relative; }
+    .header-container { 
+        position: relative; 
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
     header .mobile-cart-top {
         display: flex !important;
         position: absolute;
         right: 15px;
         top: 50%;
         transform: translateY(-50%);
-        z-index: 1000; /* Обычный z-index */
+        z-index: 1000;
     }
     .mobile-cart-top-link {
         display: inline-flex;
         align-items: center;
-        gap: 6px;
+        gap: 4px;
         text-decoration: none;
         color: var(--text);
         background: rgba(147, 112, 219, 0.12);
         border: 1px solid rgba(147, 112, 219, 0.25);
-        padding: 6px 8px;
-        border-radius: 8px;
-        font-size: 11px;
+        padding: 4px 6px;
+        border-radius: 6px;
+        font-size: 10px;
         line-height: 1;
     }
-    .mobile-cart-top-link i { font-size: 14px; }
-    .mobile-cart-top .cart-text { font-size: 11px; font-weight: 600; }
+    .mobile-cart-top-link i { font-size: 12px; }
+    .mobile-cart-top .cart-text { font-size: 9px; font-weight: 600; }
     .mobile-cart-top .cart-count {
         position: static;
-        min-width: 16px;
-        height: 16px;
-        border-radius: 8px;
+        min-width: 14px;
+        height: 14px;
+        border-radius: 7px;
         background: var(--accent);
         color: var(--dark-bg);
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        font-size: 10px;
+        font-size: 8px;
         font-weight: 700;
         border: none;
     }
     /* Скрываем десктопную корзину в меню на мобильных */
     .cart-icon { display: none !important; }
+    
+    /* Показываем кнопку меню на мобильных */
+    .mobile-menu-btn { display: block !important; }
+    
+    /* Показываем навигацию на мобильных */
+    nav { display: block !important; }
     /* Мобильная корзина справа */
     .only-mobile { display: inline-flex; align-items: center; gap: 10px; margin-left: auto; text-decoration: none; color: var(--text); }
     .mobile-cart-link { position: relative; margin-left: auto; display: inline-flex; align-items: center; gap: 10px; }
