@@ -19,9 +19,11 @@ export function getTransporter() {
 
 export async function sendOrderEmail({ to, subject, html }) {
   const t = getTransporter();
+  // Поддержка множественных получателей
+  const recipients = Array.isArray(to) ? to.join(',') : to;
   const info = await t.sendMail({
     from: process.env.SMTP_FROM,
-    to,
+    to: recipients,
     subject,
     html,
   });
@@ -30,9 +32,11 @@ export async function sendOrderEmail({ to, subject, html }) {
 
 export async function sendContactEmail({ to, subject, html }) {
   const t = getTransporter();
+  // Поддержка множественных получателей
+  const recipients = Array.isArray(to) ? to.join(',') : to;
   const info = await t.sendMail({
     from: process.env.SMTP_FROM,
-    to,
+    to: recipients,
     subject,
     html,
   });
@@ -41,9 +45,11 @@ export async function sendContactEmail({ to, subject, html }) {
 
 export async function sendEmail({ to, subject, html }) {
   const t = getTransporter();
+  // Поддержка множественных получателей
+  const recipients = Array.isArray(to) ? to.join(',') : to;
   const info = await t.sendMail({
     from: process.env.SMTP_FROM,
-    to,
+    to: recipients,
     subject,
     html,
   });

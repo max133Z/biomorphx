@@ -45,8 +45,9 @@ export async function POST(request) {
     }
 
     // Отправка email
+    const emailRecipients = process.env.CALLBACK_EMAIL_TO || process.env.ORDER_EMAIL_TO;
     const emailData = {
-      to: process.env.CALLBACK_EMAIL_TO || process.env.ORDER_EMAIL_TO,
+      to: emailRecipients,
       subject: 'Новая заявка на звонок - BioMorphX',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

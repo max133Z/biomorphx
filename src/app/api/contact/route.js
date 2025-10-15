@@ -88,8 +88,9 @@ export async function POST(request) {
           <p>${sanitizeHtml(safeMessage)}</p>
         `;
 
+        const emailRecipients = process.env.CONTACT_EMAIL_TO || process.env.ORDER_EMAIL_TO || email;
         await sendContactEmail({
-          to: process.env.CONTACT_EMAIL_TO || process.env.ORDER_EMAIL_TO || email,
+          to: emailRecipients,
           subject: `Новое сообщение с сайта от ${name}`,
           html,
         });
