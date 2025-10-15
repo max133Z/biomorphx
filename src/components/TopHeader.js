@@ -62,9 +62,9 @@ const TopHeader = () => {
                 <i className="fas fa-map-marker-alt"></i>
                 Санкт-Петербург
               </span>
-              <a href="tel:+79990413755" className="phone">
+              <a href="tel:+79046389416" className="phone">
                 <i className="fas fa-phone"></i>
-                +7 999 041 37 55
+                +7 904 638 94 16
               </a>
             </div>
             <div className="top-header-right">
