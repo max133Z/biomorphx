@@ -18,24 +18,9 @@ export default function AdminPanel() {
   const router = useRouter();
 
   useEffect(() => {
-    // Проверяем авторизацию при загрузке страницы
-    checkAuth();
+    // При загрузке страницы показываем форму входа
+    setIsAuthenticated(false);
   }, []);
-
-  const checkAuth = async () => {
-    try {
-      const response = await fetch('/api/admin/orders');
-      if (response.ok) {
-        setIsAuthenticated(true);
-        fetchOrders();
-        fetchEmails();
-      } else {
-        setIsAuthenticated(false);
-      }
-    } catch (error) {
-      setIsAuthenticated(false);
-    }
-  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -82,6 +67,8 @@ export default function AdminPanel() {
   };
 
   const fetchOrders = async () => {
+    if (!username || !password) return;
+    
     setLoading(true);
     try {
       console.log('🔍 Админ: Запрашиваем заказы...');
@@ -120,6 +107,8 @@ export default function AdminPanel() {
   };
 
   const fetchEmails = async () => {
+    if (!username || !password) return;
+    
     setLoading(true);
     try {
       const credentials = btoa(`${username}:${password}`);

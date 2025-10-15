@@ -7,7 +7,8 @@ const ADMIN_ENABLED = (process.env.ADMIN_ENABLED || '1') === '1'
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
 
-  if (pathname.startsWith('/admin')) {
+  // Защищаем только API админки, не саму страницу
+  if (pathname.startsWith('/api/admin')) {
     if (!ADMIN_ENABLED) {
       return new NextResponse('Not Found', { status: 404 })
     }
