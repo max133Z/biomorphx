@@ -46,7 +46,7 @@ export async function POST(request) {
 
     // Отправка email
     const emailData = {
-      to: 'vladskaromnyy@gmail.com',
+      to: process.env.CALLBACK_EMAIL_TO || process.env.ORDER_EMAIL_TO,
       subject: 'Новая заявка на звонок - BioMorphX',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
