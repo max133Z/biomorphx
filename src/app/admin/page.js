@@ -18,24 +18,67 @@ export default function AdminPanel() {
   const router = useRouter();
 
   useEffect(() => {
-    // Проверяем, авторизован ли пользователь через Basic Auth
-    // Middleware уже проверил авторизацию, если мы здесь - значит авторизованы
-    setIsAuthenticated(true);
-    fetchOrders();
-    fetchEmails();
+    // Проверяем авторизацию при загрузке страницы
+    checkAuth();
   }, []);
 
-  const handleLogin = (e) => {
+  const checkAuth = async () => {
+    try {
+      const response = await fetch('/api/admin/orders');
+      if (response.ok) {
+        setIsAuthenticated(true);
+        fetchOrders();
+        fetchEmails();
+      } else {
+        setIsAuthenticated(false);
+      }
+    } catch (error) {
+      setIsAuthenticated(false);
+    }
+  };
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Авторизация через middleware (Basic Auth)
-    // Форма оставлена для совместимости, но реальная проверка на сервере
-    alert('Используйте авторизацию через HTTP Basic Auth');
+    
+    if (!username || !password) {
+      alert('Пожалуйста, заполните все поля');
+      return;
+    }
+    
+    setLoading(true);
+    
+    try {
+      // Создаем Basic Auth header
+      const credentials = btoa(`${username}:${password}`);
+      
+      const response = await fetch('/api/admin/orders', {
+        headers: {
+          'Authorization': `Basic ${credentials}`
+        }
+      });
+      
+      if (response.ok) {
+        setIsAuthenticated(true);
+        fetchOrders();
+        fetchEmails();
+      } else {
+        alert('Неверные учетные данные');
+        setUsername('');
+        setPassword('');
+      }
+    } catch (error) {
+      alert('Ошибка авторизации. Попробуйте еще раз.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleLogout = () => {
-    // Для выхода пользователь должен закрыть браузер или очистить Basic Auth
-    alert('Для выхода закройте браузер или очистите данные сайта');
-    router.push('/');
+    setIsAuthenticated(false);
+    setUsername('');
+    setPassword('');
+    setOrders([]);
+    setEmails([]);
   };
 
   const fetchOrders = async () => {
@@ -43,9 +86,12 @@ export default function AdminPanel() {
     try {
       console.log('🔍 Админ: Запрашиваем заказы...');
       
-      // Basic Auth уже в заголовках браузера (middleware проверяет при каждом запросе)
+      // Используем сохраненные учетные данные для авторизации
+      const credentials = btoa(`${username}:${password}`);
       const response = await fetch('/api/admin/orders', {
-        credentials: 'include' // Включаем авторизационные заголовки
+        headers: {
+          'Authorization': `Basic ${credentials}`
+        }
       });
       console.log('📊 Админ: Статус ответа:', response.status);
       
@@ -76,8 +122,11 @@ export default function AdminPanel() {
   const fetchEmails = async () => {
     setLoading(true);
     try {
+      const credentials = btoa(`${username}:${password}`);
       const response = await fetch('/api/admin/emails', {
-        credentials: 'include'
+        headers: {
+          'Authorization': `Basic ${credentials}`
+        }
       });
       if (response.ok) {
         const data = await response.json();
@@ -230,8 +279,8 @@ export default function AdminPanel() {
                 required
               />
             </div>
-            <button type="submit" className="btn-login">
-              <i className="fas fa-sign-in-alt"></i> Войти
+            <button type="submit" className="btn-login" disabled={loading}>
+              <i className="fas fa-sign-in-alt"></i> {loading ? 'Вход...' : 'Войти'}
             </button>
           </form>
           <button onClick={() => router.push('/')} className="btn-back">
