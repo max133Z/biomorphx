@@ -1,0 +1,253 @@
+/* ===== СТРАНИЦА СПИСКА СТАТЕЙ ===== */
+
+/* Hero секция */
+.articles-hero {
+    background: linear-gradient(45deg, rgba(10, 14, 42, 0.95) 0%, rgba(26, 31, 74, 0.95) 100%), 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230a0e2a"/><path d="M0 50 Q 25 25, 50 50 T 100 50" stroke="rgba(147,112,219,0.05)" stroke-width="2" fill="none"/></svg>');
+    padding: 180px 0 100px; /* Отступ для fixed TopHeader + Header */
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.articles-hero::before {
+    content: '';
+    position: absolute;
+    top: -30%;
+    left: -15%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(147,112,219,0.2) 0%, rgba(147,112,219,0) 70%);
+    border-radius: 50%;
+    animation: pulse 8s infinite alternate;
+}
+
+.articles-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(42,138,128,0.2) 0%, rgba(42,138,128,0) 70%);
+    border-radius: 50%;
+    animation: pulse 6s infinite alternate-reverse;
+}
+
+.articles-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.articles-hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 25px;
+    background: linear-gradient(90deg, #ffffff, var(--accent), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% auto;
+    animation: gradientText 8s ease infinite;
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.articles-hero-subtitle {
+    font-size: 1.3rem;
+    color: var(--gray);
+    margin-bottom: 0;
+    line-height: 1.6;
+}
+
+/* Секция со списком статей */
+.articles-list-section {
+    padding: 80px 0;
+    background: linear-gradient(45deg, rgba(10, 14, 42, 0.9) 0%, rgba(26, 31, 74, 0.9) 100%);
+    min-height: 50vh;
+}
+
+/* Сетка статей - используем стили как на главной */
+.articles-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+}
+
+/* Призыв к действию */
+.articles-cta {
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+}
+
+.cta-card {
+    background: linear-gradient(135deg, rgba(147,112,219,0.1) 0%, rgba(42,138,128,0.1) 100%);
+    border: 2px solid rgba(147, 112, 219, 0.3);
+    border-radius: 25px;
+    padding: 60px 40px;
+    text-align: center;
+    max-width: 700px;
+    transition: var(--transition);
+}
+
+.cta-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(147, 112, 219, 0.2);
+}
+
+.cta-icon {
+    font-size: 3rem;
+    color: var(--accent);
+    margin-bottom: 25px;
+}
+
+.cta-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 15px;
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.cta-text {
+    font-size: 1.1rem;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(45deg, var(--accent) 0%, var(--orange) 100%);
+    color: white;
+    padding: 15px 35px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: var(--transition);
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(147, 112, 219, 0.4);
+}
+
+/* Анимация */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.3; }
+    100% { transform: scale(1.1); opacity: 0.5; }
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+
+/* Планшеты */
+@media (max-width: 992px) {
+    .articles-grid {
+        gap: 30px;
+    }
+    
+    .articles-hero-title {
+        font-size: 2.8rem;
+    }
+}
+
+/* Мобильные устройства */
+@media (max-width: 768px) {
+    .articles-hero {
+        padding: 140px 0 60px;
+    }
+    
+    .articles-hero-title {
+        font-size: 2.2rem;
+    }
+    
+    .articles-hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .articles-list-section {
+        padding: 60px 0;
+    }
+    
+    .articles-grid {
+        gap: 25px;
+    }
+    
+    .cta-card {
+        padding: 40px 25px;
+    }
+    
+    .cta-title {
+        font-size: 1.6rem;
+    }
+    
+    .cta-text {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .articles-hero {
+        padding: 130px 0 50px;
+    }
+    
+    .articles-hero-content {
+        padding: 0 20px;
+    }
+    
+    .articles-hero-title {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+    
+    .articles-hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .articles-list-section {
+        padding: 50px 0;
+    }
+    
+    .articles-grid {
+        gap: 20px;
+    }
+    
+    .articles-cta {
+        margin-top: 60px;
+    }
+    
+    .cta-card {
+        padding: 35px 20px;
+    }
+    
+    .cta-icon {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+    
+    .cta-title {
+        font-size: 1.4rem;
+        margin-bottom: 12px;
+    }
+    
+    .cta-text {
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+    }
+    
+    .cta-button {
+        padding: 12px 28px;
+        font-size: 1rem;
+    }
+}
+

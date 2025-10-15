@@ -1,0 +1,83 @@
+/* ===== КНОПКИ ===== */
+
+.btn {
+    color: var(--dark-bg);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    gap: 8px;
+    background: linear-gradient(45deg, var(--accent) 0%, var(--secondary) 100%);
+    box-shadow: 0 5px 15px rgba(147, 112, 219, 0.5);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(45deg, var(--primary) 0%, var(--teal) 100%);
+    z-index: -1;
+    transition: width 0.5s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(147, 112, 219, 0.6);
+}
+
+.btn:hover::before {
+    width: 100%;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid rgba(147, 112, 219, 0.4);
+    color: var(--accent);
+    box-shadow: none;
+}
+
+.btn-outline:hover {
+    border-color: var(--accent);
+    background: rgba(147, 112, 219, 0.1);
+    transform: translateY(-3px);
+}
+
+.btn-sm {
+    padding: 12px 25px;
+    font-size: 15px;
+    border-radius: 70px;
+    flex: 1;
+    text-align: center;
+}
+
+.btn-icon {
+    width: 50px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-details {
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+}
+
+.btn-details:hover {
+    background: rgba(147, 112, 219, 0.1);
+}
+
