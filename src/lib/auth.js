@@ -19,7 +19,7 @@ export function checkAdminAuth(request) {
     const [user, pass] = decoded.split(':');
 
     const ADMIN_USER = process.env.ADMIN_USER || 'admin';
-    const ADMIN_PASS = process.env.ADMIN_PASS || 'admin';
+    const ADMIN_PASS = process.env.ADMIN_PASS || 'admin123';
 
     if (user !== ADMIN_USER || pass !== ADMIN_PASS) {
       return NextResponse.json({ 

@@ -1,17 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const ADMIN_USER = process.env.ADMIN_USER || 'admin'
-const ADMIN_PASS = process.env.ADMIN_PASS || 'admin'
-const ADMIN_ENABLED = (process.env.ADMIN_ENABLED || '1') === '1'
-
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
 
   // Защищаем только API админки, не саму страницу
   if (pathname.startsWith('/api/admin')) {
-    if (!ADMIN_ENABLED) {
-      return new NextResponse('Not Found', { status: 404 })
-    }
     const auth = req.headers.get('authorization')
 
     if (!auth || !auth.startsWith('Basic ')) {
@@ -25,6 +18,10 @@ export function middleware(req: NextRequest) {
     // Edge runtime: используем atob вместо Buffer
     const decoded = atob(encoded)
     const [user, pass] = decoded.split(':')
+
+    // Используем переменные окружения
+    const ADMIN_USER = process.env.ADMIN_USER || 'admin'
+    const ADMIN_PASS = process.env.ADMIN_PASS || 'admin123'
 
     if (user !== ADMIN_USER || pass !== ADMIN_PASS) {
       return new NextResponse('Unauthorized', { status: 401 })
