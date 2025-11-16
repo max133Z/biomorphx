@@ -1,0 +1,202 @@
+.privacy-policy-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  color: #ffffff;
+  padding: 140px 0 2rem; /* Отступ для fixed TopHeader + Header */
+}
+
+.privacy-policy-page .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.policy-content {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.policy-content h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 3rem;
+  background: linear-gradient(90deg, #ffffff, var(--accent), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+  animation: gradientText 8s ease infinite;
+  font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.policy-content h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 2.5rem 0 1.5rem 0;
+  color: #00d4ff;
+  border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+  padding-bottom: 0.5rem;
+}
+
+.policy-content h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 1.5rem 0 1rem 0;
+  color: #ff6b6b;
+}
+
+.policy-content p {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  color: #e0e0e0;
+}
+
+.policy-content ul {
+  margin: 1rem 0;
+  padding-left: 2rem;
+}
+
+.policy-content li {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+  color: #e0e0e0;
+}
+
+.policy-content strong {
+  color: #00d4ff;
+  font-weight: 600;
+}
+
+.table-container {
+  margin: 2rem 0;
+  overflow-x: auto;
+}
+
+.policy-content table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.policy-content th,
+.policy-content td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.policy-content th {
+  background: rgba(0, 212, 255, 0.1);
+  color: #00d4ff;
+  font-weight: 600;
+}
+
+.policy-content td {
+  color: #e0e0e0;
+}
+
+.policy-content tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.back-link {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.back-button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: linear-gradient(45deg, #00d4ff, #ff6b6b);
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+}
+
+.back-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
+}
+
+/* Мобильные стили */
+@media (max-width: 768px) {
+  .privacy-policy-page .container {
+    padding: 0 1rem;
+  }
+  
+  .policy-content {
+    padding: 2rem 1.5rem;
+  }
+  
+  .policy-content h1 {
+    font-size: 2rem;
+  }
+  
+  .policy-content h2 {
+    font-size: 1.5rem;
+  }
+  
+  .policy-content h3 {
+    font-size: 1.2rem;
+  }
+  
+  .policy-content p,
+  .policy-content li {
+    font-size: 0.95rem;
+  }
+  
+  .table-container {
+    margin: 1.5rem -1.5rem;
+  }
+  
+  .policy-content table {
+    font-size: 0.9rem;
+  }
+  
+  .policy-content th,
+  .policy-content td {
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .policy-content {
+    padding: 1.5rem 1rem;
+  }
+  
+  .policy-content h1 {
+    font-size: 1.8rem;
+  }
+  
+  .policy-content h2 {
+    font-size: 1.3rem;
+  }
+  
+  .policy-content h3 {
+    font-size: 1.1rem;
+  }
+  
+  .policy-content p,
+  .policy-content li {
+    font-size: 0.9rem;
+  }
+  
+  .back-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+
