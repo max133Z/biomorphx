@@ -19,8 +19,14 @@ export default function ArticlesPage() {
     {
       id: 'isoleucine-guide',
       slug: 'isoleucine-guide',
-      title: 'L-изолейцин: энергия и восстановление',
+      title: 'Изолейцин: энергия и восстановление',
       image: '/img/for state_2.png',
+    },
+    {
+      id: 'leucine-guide',
+      slug: 'leucine-guide',
+      title: 'Лейцин: влияние на синтез белка и метаболизм мышц',
+      image: '/img/leucine_st.png',
     },
   ];
 

@@ -52,9 +52,9 @@ body {
 .article-header .container {
     position: relative;
     z-index: 2;
-    max-width: 800px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 30px;
+    padding: 0 40px;
 }
 
 /* Хлебные крошки */
@@ -98,10 +98,10 @@ body {
 
 .article-date, .article-read-time {
     color: var(--gray);
-    font-size: 1rem;
-    margin: 0 15px;
+    font-size: 1.1rem;
+    margin: 0 20px;
     display: inline-block;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .article-date::before {
@@ -116,11 +116,11 @@ body {
 
 /* Заголовок */
 .article-title {
-    font-size: 2.5rem !important;
+    font-size: 3rem !important;
     font-weight: 800;
     color: var(--text);
-    margin-bottom: 30px;
-    line-height: 1.3;
+    margin-bottom: 35px;
+    line-height: 1.25;
     background: linear-gradient(90deg, #ffffff, var(--accent), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -182,20 +182,20 @@ body {
 
 /* Краткое описание */
 .article-excerpt {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: var(--text);
-    line-height: 1.7;
+    line-height: 1.75;
     margin-bottom: 0;
-    padding: 25px;
+    padding: 35px;
     background: var(--dark-card);
     border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-left: 4px solid var(--accent);
     transition: var(--transition);
     font-style: italic;
-    max-width: 700px;
+    max-width: 900px;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 .article-excerpt:hover {
@@ -223,9 +223,9 @@ body {
 }
 
 .toc-card {
-    max-width: 800px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 30px;
+    padding: 40px;
     background: rgba(26, 31, 74, 0.6);
     border-radius: 20px;
     border: 2px solid rgba(147, 112, 219, 0.3);
@@ -233,10 +233,10 @@ body {
 }
 
 .toc-title {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
     font-weight: 600;
     color: var(--accent);
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     text-align: center;
     font-family: 'Montserrat Alternates', sans-serif;
 }
@@ -283,15 +283,15 @@ body {
 }
 
 .content-wrapper {
-    max-width: 800px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 0 30px;
+    padding: 0 40px;
 }
 
 .article-body {
     background: var(--dark-card);
     border-radius: 15px;
-    padding: 50px;
+    padding: 60px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: var(--transition);
 }
@@ -301,7 +301,7 @@ body {
 }
 
 .article-section {
-    margin-bottom: 50px;
+    margin-bottom: 60px;
 }
 
 .article-section:last-child {
@@ -315,22 +315,69 @@ body {
 }
 
 .article-section h2 {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
     font-weight: 600;
     color: var(--accent);
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     padding-top: 60px;
     margin-top: -40px;
     font-family: 'Montserrat Alternates', sans-serif;
     border-bottom: 2px solid var(--accent);
+    padding-bottom: 12px;
+    word-break: normal;
+    overflow-wrap: break-word;
+    white-space: normal;
+    hyphens: none;
+}
+
+.article-section h3 {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-family: 'Montserrat Alternates', sans-serif;
     padding-bottom: 10px;
+    border-bottom: 1px solid rgba(147, 112, 219, 0.2);
+    word-break: normal;
+    overflow-wrap: break-word;
+    white-space: normal;
+    hyphens: none;
+}
+
+.article-section h3:first-of-type {
+    margin-top: 25px;
 }
 
 .article-section p {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: var(--text);
-    line-height: 1.8;
-    margin-bottom: 20px;
+    line-height: 1.9;
+    margin-bottom: 24px;
+    word-break: normal;
+    overflow-wrap: break-word;
+    hyphens: none;
+}
+
+.article-section p:first-of-type {
+    margin-top: 0;
+}
+
+.article-section p strong {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* Улучшенная читаемость текста */
+.article-section p + p {
+    margin-top: 0;
+}
+
+/* Улучшенные отступы между секциями */
+.article-section + .article-section {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Списки */
@@ -343,16 +390,19 @@ body {
 }
 
 .benefits-list li, .deficiency-list li {
-    padding: 20px 25px;
+    padding: 24px 30px;
     position: relative;
     color: var(--text);
-    font-size: 1.1rem;
-    line-height: 1.6;
+    font-size: 1.15rem;
+    line-height: 1.7;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    padding-left: 60px;
+    padding-left: 70px;
     transition: var(--transition);
+    word-break: normal;
+    overflow-wrap: break-word;
+    hyphens: none;
 }
 
 .benefits-list li:hover, .deficiency-list li:hover {
@@ -404,7 +454,7 @@ body {
 .food-category {
     background: var(--dark-card);
     border-radius: 15px;
-    padding: 30px;
+    padding: 35px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: var(--transition);
 }
@@ -415,10 +465,10 @@ body {
 }
 
 .food-category h3 {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: 600;
     color: var(--accent);
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     font-family: 'Montserrat Alternates', sans-serif;
     display: flex;
     align-items: center;
@@ -439,18 +489,36 @@ body {
 }
 
 .food-category li {
-    padding: 12px 16px;
+    padding: 20px 22px;
     color: var(--text);
-    font-size: 1rem;
+    font-size: 1.1rem;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: var(--transition);
+    line-height: 1.7;
+}
+
+.food-category li strong {
+    display: block;
+    color: var(--accent);
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.food-category li .food-amount {
+    display: block;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.05rem;
+    margin-top: 5px;
+    line-height: 1.6;
 }
 
 .food-category li:hover {
     background: rgba(147, 112, 219, 0.1);
     border-color: var(--accent);
+    transform: translateY(-2px);
 }
 
 /* Предупреждение */
@@ -458,11 +526,11 @@ body {
     background: rgba(231, 76, 60, 0.1);
     border: 1px solid rgba(231, 76, 60, 0.3);
     border-radius: 12px;
-    padding: 25px 25px 25px 72px;
-    margin: 30px 0;
+    padding: 30px 35px 30px 80px;
+    margin: 35px 0;
     color: var(--text);
-    font-size: 1.1rem;
-    line-height: 1.7;
+    font-size: 1.2rem;
+    line-height: 1.8;
     position: relative;
 }
 
@@ -475,12 +543,29 @@ body {
     font-size: 1.6rem;
 }
 
- .warning-box strong {
-     color: #e74c3c;
-     font-weight: 600;
-     display: inline-block;
-     margin-right: 6px;
- }
+.warning-box strong {
+    color: #e74c3c;
+    font-weight: 600;
+    display: inline-block;
+    margin-right: 6px;
+}
+
+.warning-box ul {
+    margin: 15px 0 0 20px;
+    padding: 0;
+    list-style: disc;
+}
+
+.warning-box ul li {
+    margin: 8px 0;
+    padding: 0;
+    background: none;
+    border: none;
+}
+
+.warning-box ul li::before {
+    display: none;
+}
  
  /* Ссылка на источник */
  .article-section a {
@@ -494,6 +579,217 @@ body {
      color: var(--orange);
      text-decoration: underline;
  }
+
+/* Визуальные блоки для улучшения читаемости */
+.info-box {
+    background: rgba(147, 112, 219, 0.1);
+    border: 2px solid rgba(147, 112, 219, 0.3);
+    border-radius: 12px;
+    padding: 35px;
+    margin: 30px 0;
+    color: var(--text);
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+.info-box p {
+    margin: 0;
+    word-break: normal;
+    overflow-wrap: break-word;
+    hyphens: none;
+}
+
+.info-box p:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.highlight-box {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.15) 0%, rgba(147, 112, 219, 0.15) 100%);
+    border: 2px solid rgba(76, 175, 80, 0.4);
+    border-radius: 15px;
+    padding: 40px;
+    margin: 35px 0;
+    text-align: center;
+    position: relative;
+}
+
+.highlight-box-icon {
+    font-size: 3rem;
+    margin-bottom: 18px;
+    display: block;
+}
+
+.highlight-box-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #4CAF50;
+    margin: 0 0 12px 0;
+}
+
+.highlight-box-subtitle {
+    font-size: 1.1rem;
+    color: var(--text);
+    opacity: 0.9;
+    margin: 12px 0 0 0;
+}
+
+.stat-box {
+    background: rgba(147, 112, 219, 0.1);
+    border: 2px solid rgba(147, 112, 219, 0.3);
+    border-radius: 15px;
+    padding: 35px;
+    margin: 30px 0;
+}
+
+.stat-box-title {
+    margin-top: 0;
+    color: var(--accent);
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.info-warning-box {
+    background: rgba(231, 76, 60, 0.1);
+    border-left: 4px solid #e74c3c;
+    border-radius: 8px;
+    padding: 28px;
+    margin: 30px 0;
+    color: var(--text);
+    font-size: 1.15rem;
+    line-height: 1.8;
+}
+
+.info-warning-box p {
+    margin: 0;
+}
+
+/* FAQ секция */
+.faq-section {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 2px solid rgba(147, 112, 219, 0.3);
+}
+
+.faq-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(147, 112, 219, 0.2);
+    border-radius: 12px;
+    padding: 32px;
+    margin: 25px 0;
+    transition: var(--transition);
+}
+
+.faq-item:hover {
+    background: rgba(147, 112, 219, 0.1);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.faq-question {
+    color: var(--accent);
+    font-size: 1.5rem;
+    margin-bottom: 18px;
+    margin-top: 0;
+    font-weight: 600;
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.faq-answer {
+    margin: 0;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    word-break: normal;
+    overflow-wrap: break-word;
+    hyphens: none;
+}
+
+/* Карточки с эффектами/преимуществами */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.benefit-card {
+    padding: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    transition: var(--transition);
+}
+
+.benefit-card:hover {
+    background: rgba(147, 112, 219, 0.1);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+}
+
+.benefit-card strong {
+    color: #4CAF50;
+    font-size: 1.2rem;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.benefit-card p {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text);
+    opacity: 0.9;
+}
+
+/* Разделитель секций */
+.section-divider {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(147, 112, 219, 0.3), transparent);
+    margin: 40px 0;
+    border: none;
+}
+
+/* Улучшенная типографика для лучшей читаемости */
+.article-body {
+    font-size: 1.2rem;
+    line-height: 1.9;
+    color: rgba(255, 255, 255, 0.9);
+    word-break: normal;
+    overflow-wrap: break-word;
+    hyphens: none;
+}
+
+.article-body p {
+    text-align: left;
+    word-break: normal;
+    overflow-wrap: break-word;
+    white-space: normal;
+    hyphens: none;
+}
+
+/* Улучшенное визуальное разделение контента */
+.article-section {
+    scroll-margin-top: 100px; /* Отступ для якорных ссылок */
+}
+
+/* Плавная прокрутка */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Улучшенные стили для ссылок */
+.article-section a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-color: rgba(147, 112, 219, 0.4);
+    text-underline-offset: 3px;
+    transition: var(--transition);
+}
+
+.article-section a:hover {
+    color: var(--orange);
+    text-decoration-color: var(--orange);
+}
 
 /* Боковая панель */
 .article-sidebar {
@@ -799,7 +1095,17 @@ body {
     
     .food-category li {
         font-size: 0.9rem;
-        padding: 10px 14px;
+        padding: 14px 16px;
+    }
+    
+    .food-category li strong {
+        font-size: 1rem;
+        margin-bottom: 5px;
+    }
+    
+    .food-category li .food-amount {
+        font-size: 0.85rem;
+        margin-top: 3px;
     }
     
     .sidebar-card {
@@ -969,9 +1275,99 @@ body {
         margin-bottom: 15px;
     }
     
+    .article-section h3 {
+        font-size: 1.2rem;
+        margin-top: 25px;
+        margin-bottom: 12px;
+        padding-bottom: 6px;
+    }
+    
+    .article-section h3:first-of-type {
+        margin-top: 20px;
+    }
+    
+    .article-section + .article-section {
+        margin-top: 35px;
+        padding-top: 25px;
+    }
+    
     .article-section p {
         font-size: 0.9rem;
         line-height: 1.6;
+    }
+    
+    .info-box {
+        padding: 20px;
+        font-size: 1rem;
+        margin: 20px 0;
+    }
+    
+    .highlight-box {
+        padding: 25px 20px;
+        margin: 25px 0;
+    }
+    
+    .highlight-box-icon {
+        font-size: 2rem;
+    }
+    
+    .highlight-box-title {
+        font-size: 1.2rem;
+    }
+    
+    .highlight-box-subtitle {
+        font-size: 0.85rem;
+    }
+    
+    .stat-box {
+        padding: 20px;
+        margin: 20px 0;
+    }
+    
+    .stat-box-title {
+        font-size: 1.2rem;
+    }
+    
+    .info-warning-box {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+    
+    .faq-section {
+        margin-top: 30px;
+        padding-top: 30px;
+    }
+    
+    .faq-item {
+        padding: 20px;
+        margin: 15px 0;
+    }
+    
+    .faq-question {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+    }
+    
+    .faq-answer {
+        font-size: 0.9rem;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin: 20px 0;
+    }
+    
+    .benefit-card {
+        padding: 15px;
+    }
+    
+    .benefit-card strong {
+        font-size: 1rem;
+    }
+    
+    .benefit-card p {
+        font-size: 0.85rem;
     }
     
     .benefits-list li, .deficiency-list li {
@@ -1010,7 +1406,17 @@ body {
     
     .food-category li {
         font-size: 0.85rem;
-        padding: 8px 12px;
+        padding: 12px 14px;
+    }
+    
+    .food-category li strong {
+        font-size: 0.95rem;
+        margin-bottom: 4px;
+    }
+    
+    .food-category li .food-amount {
+        font-size: 0.8rem;
+        margin-top: 2px;
     }
     
     .sidebar-card {
@@ -1036,5 +1442,10 @@ body {
     
     .product-card p {
         font-size: 0.9rem;
+    }
+    
+    .article-section + .article-section {
+        margin-top: 25px;
+        padding-top: 20px;
     }
 }

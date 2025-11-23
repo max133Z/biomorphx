@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import products from "../data/products";
 import reviews from "../data/reviews";
 import ProductCard from "../components/ProductCard";
@@ -9,6 +10,148 @@ import Footer from "../components/Footer";
 import { useCart } from "../contexts/CartContext";
 import WhatsAppWidget from "../components/WhatsAppWidget";
 import "./styles/pages/home-mobile.css";
+
+function ArticlesCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  
+  const articles = [
+    {
+      id: 'leucine',
+      href: '/articles/leucine-guide',
+      image: '/img/leucine_st.png',
+      title: 'Лейцин: влияние на синтез белка и метаболизм мышц',
+      ariaLabel: 'Лейцин — перейти к статье'
+    },
+    {
+      id: 'threonine',
+      href: '/articles/threonine-guide',
+      image: '/img/for state_1.png',
+      title: 'Что такое треонин? 7 важных фактов',
+      ariaLabel: 'Треонин — перейти к статье'
+    },
+    {
+      id: 'isoleucine',
+      href: '/articles/isoleucine-guide',
+      image: '/img/for state_2.png',
+      title: 'Изолейцин: энергия и восстановление',
+      ariaLabel: 'Изолейцин — перейти к статье'
+    }
+  ];
+
+  // Определяем количество видимых карточек в зависимости от ширины экрана
+  const [visibleCards, setVisibleCards] = useState(2);
+  
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setVisibleCards(1); // На мобильных показываем 1 карточку
+      } else {
+        setVisibleCards(2); // На десктопе показываем 2 карточки
+      }
+    };
+    
+    handleResize(); // Проверяем при монтировании
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
+  const maxIndex = Math.max(0, articles.length - visibleCards);
+
+  const nextSlide = (e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
+
+  const prevSlide = (e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+  };
+
+  // Предотвращение скролла страницы при взаимодействии с каруселью
+  const handleTouchStart = (e) => {
+    e.stopPropagation();
+  };
+
+  const handleTouchMove = (e) => {
+    e.stopPropagation();
+  };
+
+  return (
+    <div className="articles-carousel-wrapper">
+      <div className="articles-carousel-container">
+        <button 
+          className="carousel-arrow carousel-arrow-left" 
+          onClick={prevSlide}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          aria-label="Предыдущие статьи"
+          type="button"
+        >
+          <i className="fas fa-chevron-left"></i>
+        </button>
+        
+        <div 
+          className="articles-carousel"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+        >
+          <div 
+            className="articles-carousel-track" 
+            style={{ transform: `translateX(-${currentIndex * (100 / visibleCards)}%)` }}
+          >
+            {articles.map((article) => (
+              <a 
+                key={article.id}
+                href={article.href} 
+                className="articles-mini-card" 
+                aria-label={article.ariaLabel}
+              >
+                <div className="articles-mini-image">
+                  <img src={article.image} alt={article.title}/>
+                </div>
+                <h3 className="articles-mini-title">{article.title}</h3>
+              </a>
+            ))}
+          </div>
+        </div>
+        
+        <button 
+          className="carousel-arrow carousel-arrow-right" 
+          onClick={nextSlide}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          aria-label="Следующие статьи"
+          type="button"
+        >
+          <i className="fas fa-chevron-right"></i>
+        </button>
+      </div>
+      
+      <div className="carousel-dots">
+        {Array.from({ length: maxIndex + 1 }).map((_, index) => (
+          <button
+            key={index}
+            className={`carousel-dot ${index === currentIndex ? 'active' : ''}`}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setCurrentIndex(index);
+            }}
+            onTouchStart={handleTouchStart}
+            aria-label={`Перейти к слайду ${index + 1}`}
+            type="button"
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function HomeClient() {
   const { addToCart } = useCart();
@@ -89,20 +232,7 @@ export default function HomeClient() {
           <div className="section-title">
             <h2>Полезные статьи</h2>
           </div>
-          <div className="articles-mini-grid">
-            <a href="/articles/threonine-guide" className="articles-mini-card" aria-label="Треонин — перейти к статье">
-              <div className="articles-mini-image">
-                <img src="/img/for state_1.png" alt="Треонин — статья"/>
-              </div>
-              <h3 className="articles-mini-title">Что такое треонин? 7 важных фактов</h3>
-            </a>
-            <a href="/articles/isoleucine-guide" className="articles-mini-card" aria-label="L-изолейцин — перейти к статье">
-              <div className="articles-mini-image">
-                <img src="/img/for state_2.png" alt="L-изолейцин — статья"/>
-              </div>
-              <h3 className="articles-mini-title">L-изолейцин: энергия и восстановление</h3>
-            </a>
-          </div>
+          <ArticlesCarousel />
           <div style={{textAlign: 'center', marginTop: '40px'}}>
             <a href="/articles" className="btn btn-outline">Все статьи</a>
           </div>

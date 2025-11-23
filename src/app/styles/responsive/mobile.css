@@ -84,51 +84,65 @@
     }
     .mobile-menu-btn i { font-size: 1.1rem; }
     
-    /* Hero (мобайл): картинка справа от текста, всё компактнее */
+    /* Hero (мобайл): органичный вертикальный layout */
     .hero {
-        padding: clamp(0.2rem, 0.9vw, 0.3rem) 0 clamp(0.15rem, 0.8vw, 0.25rem);
+        padding: clamp(30px, 8vw, 50px) 0 clamp(40px, 10vw, 60px);
+        min-height: auto;
     }
     .hero-content {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: clamp(0.12rem, 0.9vw, 0.2rem);
+        flex-direction: column;
+        align-items: stretch;
+        gap: clamp(25px, 6vw, 35px);
     }
     .hero-text {
-        flex: 1 1 48%;
-        text-align: left;
+        width: 100%;
+        text-align: center;
+        order: 1;
     }
     .hero-image {
-        display: block;
-        flex: 0 0 50%;
-        max-width: 50%;
+        display: none;
     }
     .hero-image img {
         width: 100%;
+        max-width: min(90%, 400px);
         height: auto;
-        border-radius: 10px;
+        border-radius: 16px;
+        display: block;
+        object-fit: contain;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
     .hero h1 {
-        font-size: clamp(0.85rem, 2vw, 1rem);
+        font-size: clamp(1.5rem, 6vw, 2rem);
         line-height: 1.2;
-        margin-bottom: clamp(0.3rem, 1vw, 0.5rem);
+        margin-bottom: clamp(12px, 3vw, 18px);
+        font-weight: 800;
     }
     .hero p {
-        font-size: clamp(0.6rem, 1.4vw, 0.75rem);
-        margin-bottom: clamp(0.55rem, 1.2vw, 0.5rem);
-        line-height: 1.36;
+        font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+        margin-bottom: clamp(20px, 5vw, 30px);
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.85);
+        max-width: 100%;
+        padding: 0 clamp(10px, 3vw, 20px);
     }
     .hero-actions {
         display: flex;
-        flex-wrap: wrap;
-        gap: clamp(0.15rem, 1vw, 0.25rem);
+        flex-direction: column;
+        gap: clamp(12px, 3vw, 16px);
+        align-items: center;
+        width: 100%;
+        margin-top: clamp(20px, 5vw, 30px);
     }
     .hero .btn,
     .hero .btn.btn-outline {
-        padding: clamp(0.3rem, 1vw, 0.45rem) clamp(0.5rem, 1.8vw, 0.7rem);
-        font-size: clamp(0.65rem, 1.8vw, 0.78rem);
-        border-radius: 8px;
-        line-height: 1;
+        padding: clamp(12px, 3vw, 16px) clamp(24px, 6vw, 32px);
+        font-size: clamp(0.9rem, 3vw, 1rem);
+        border-radius: 10px;
+        line-height: 1.4;
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
     }
 
     /* Уменьшаем декоративный круг hero::before в 2 раза на мобильных */
@@ -477,8 +491,116 @@
     .articles-mini { padding: clamp(2rem, 6vw, 3rem) 0 clamp(3rem, 8vw, 4rem); }
     .articles-mini-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: clamp(1rem, 3.5vw, 1.5rem); }
     .articles-mini-card { padding: clamp(0.9rem, 3vw, 1.1rem); }
-    .articles-mini-image { height: clamp(9rem, 28vw, 11rem); margin-bottom: clamp(0.75rem, 2.5vw, 1rem); }
-    .articles-mini-title { font-size: clamp(1rem, 3.4vw, 1.1rem); }
+    .articles-mini-image { 
+        height: clamp(180px, 45vw, 200px) !important;
+        aspect-ratio: 1 !important;
+    }
+    .articles-mini-title { 
+        font-size: clamp(16px, 4vw, 18px) !important;
+        padding: clamp(12px, 3vw, 18px) clamp(15px, 4vw, 18px) clamp(15px, 3.5vw, 18px) !important;
+    }
+    
+    .articles-carousel-track .articles-mini-card {
+        min-width: 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    /* Карусель статей на мобильных */
+    .articles-carousel-wrapper {
+        padding: clamp(10px, 3vw, 15px) clamp(5px, 1.5vw, 8px) clamp(15px, 4vw, 20px) !important;
+        touch-action: pan-y !important;
+        -webkit-overflow-scrolling: touch !important;
+        margin-bottom: clamp(15px, 4vw, 20px) !important;
+    }
+    
+    .articles-carousel-container {
+        gap: clamp(6px, 1.5vw, 8px) !important;
+        padding: 0 clamp(5px, 1.5vw, 8px) !important;
+        touch-action: pan-y !important;
+    }
+    
+    .articles-carousel {
+        max-width: calc(100% - clamp(72px, 18vw, 90px)) !important;
+        padding: clamp(5px, 1.5vw, 8px) !important;
+        touch-action: pan-x !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    .articles-carousel-track {
+        gap: 0 !important;
+        padding: clamp(5px, 1.5vw, 8px) 0 !important;
+        touch-action: pan-x !important;
+    }
+    
+    .articles-carousel-track .articles-mini-card {
+        min-width: 100% !important;
+        width: 100% !important;
+        touch-action: manipulation !important;
+        padding: clamp(12px, 3vw, 15px) !important;
+        border-radius: clamp(16px, 4vw, 20px) !important;
+    }
+    
+    .articles-mini-image {
+        height: clamp(200px, 50vw, 240px) !important;
+        aspect-ratio: 1 !important;
+        border-radius: clamp(12px, 3vw, 16px) !important;
+        margin-bottom: clamp(8px, 2.5vw, 12px) !important;
+    }
+    
+    .articles-mini-image img {
+        width: 92% !important;
+        height: 92% !important;
+        padding: clamp(10px, 3vw, 14px) !important;
+    }
+    
+    .articles-mini-title {
+        font-size: clamp(16px, 4.5vw, 18px) !important;
+        font-weight: 700 !important;
+        padding: clamp(10px, 2.5vw, 12px) !important;
+        line-height: 1.4 !important;
+        letter-spacing: 0.01em !important;
+    }
+    
+    .carousel-arrow {
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: transparent !important;
+        width: clamp(40px, 11vw, 45px) !important;
+        height: clamp(40px, 11vw, 45px) !important;
+        font-size: clamp(0.95rem, 2.8vw, 1.1rem) !important;
+        background: rgba(147, 112, 219, 0.35) !important;
+        border: 2px solid rgba(147, 112, 219, 0.6) !important;
+        box-shadow: 0 2px 8px rgba(147, 112, 219, 0.2) !important;
+    }
+    
+    .carousel-arrow:active {
+        transform: scale(0.95) !important;
+        background: rgba(147, 112, 219, 0.5) !important;
+    }
+    
+    .carousel-dot {
+        touch-action: manipulation !important;
+        -webkit-tap-highlight-color: transparent !important;
+        width: clamp(10px, 2.5vw, 12px) !important;
+        height: clamp(10px, 2.5vw, 12px) !important;
+        border-width: 2px !important;
+    }
+    
+    .carousel-dots {
+        margin-top: clamp(16px, 4vw, 20px) !important;
+        gap: clamp(10px, 2.5vw, 12px) !important;
+        padding: 0 clamp(10px, 3vw, 15px) !important;
+    }
+    
+    .carousel-dot.active {
+        width: clamp(28px, 7vw, 32px) !important;
+        background: var(--accent) !important;
+        border-color: var(--accent) !important;
+    }
+    
+    .carousel-dot:active {
+        transform: scale(1.2) !important;
+    }
 
     /* Детальная продукта — компактная, но пропорциональная */
     .product-detail-section { padding: clamp(3rem, 8vw, 4rem) 0; }
@@ -571,7 +693,12 @@
     /* Основные стили */
     html { font-size: calc(var(--base-size) * (var(--mobile-scale) - 0.05)); }
     .container { padding: 0 clamp(0.9rem, 5vw, 1.25rem); }
-    .hero-image img { max-height: 80vh; }
+    .hero-image img { 
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        object-fit: cover !important;
+    }
     
     /* На очень маленьких экранах - 2 колонки */
     .product-grid { 
