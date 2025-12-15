@@ -10,29 +10,7 @@
     overflow: hidden;
 }
 
-.articles-hero::before {
-    content: '';
-    position: absolute;
-    top: -30%;
-    left: -15%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(147,112,219,0.2) 0%, rgba(147,112,219,0) 70%);
-    border-radius: 50%;
-    animation: pulse 8s infinite alternate;
-}
-
-.articles-hero::after {
-    content: '';
-    position: absolute;
-    bottom: -20%;
-    right: -10%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(42,138,128,0.2) 0%, rgba(42,138,128,0) 70%);
-    border-radius: 50%;
-    animation: pulse 6s infinite alternate-reverse;
-}
+/* Декоративные круги убраны */
 
 .articles-hero-content {
     position: relative;
@@ -70,13 +48,124 @@
     min-height: 50vh;
 }
 
-/* Сетка статей - используем стили как на главной */
+/* Сетка статей - улучшенный дизайн */
 .articles-grid {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 35px;
     margin-bottom: 60px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+}
+
+/* Улучшенные стили для карточек статей на странице списка */
+.articles-list-section .articles-mini-card {
+    background: rgba(26, 31, 74, 0.7);
+    border: 2px solid rgba(147, 112, 219, 0.25);
+    border-radius: 20px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    max-width: 100%;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    position: relative;
+    height: 100%;
+}
+
+.articles-list-section .articles-mini-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(147, 112, 219, 0.05) 0%, rgba(42, 138, 128, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: 20px;
+    z-index: 0;
+}
+
+.articles-list-section .articles-mini-card:hover::before {
+    opacity: 1;
+}
+
+.articles-list-section .articles-mini-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--accent);
+    box-shadow: 0 20px 50px rgba(147, 112, 219, 0.35);
+}
+
+.articles-list-section .articles-mini-image {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(26, 31, 74, 0.8) 0%, rgba(10, 14, 42, 0.9) 100%);
+    aspect-ratio: 1;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.articles-list-section .articles-mini-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(147, 112, 219, 0.1) 0%, rgba(42, 138, 128, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.articles-list-section .articles-mini-card:hover .articles-mini-image::after {
+    opacity: 1;
+}
+
+.articles-list-section .articles-mini-image img {
+    width: 85%;
+    height: 85%;
+    object-fit: contain;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 2;
+}
+
+.articles-list-section .articles-mini-card:hover .articles-mini-image img {
+    transform: scale(1.08) rotate(2deg);
+    box-shadow: 0 16px 40px rgba(147, 112, 219, 0.3);
+}
+
+.articles-list-section .articles-mini-title {
+    font-size: 19px;
+    font-weight: 700;
+    padding: 20px 22px 24px;
+    text-align: center;
+    color: var(--text);
+    font-family: 'Montserrat Alternates', sans-serif;
+    line-height: 1.4;
+    position: relative;
+    z-index: 1;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
 }
 
 /* Призыв к действию */
@@ -153,7 +242,18 @@
 /* Планшеты */
 @media (max-width: 992px) {
     .articles-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 30px;
+        padding: 0 15px;
+    }
+    
+    .articles-list-section .articles-mini-image {
+        height: 220px;
+    }
+    
+    .articles-list-section .articles-mini-title {
+        font-size: 17px;
+        padding: 18px 20px 22px;
     }
     
     .articles-hero-title {
@@ -180,7 +280,20 @@
     }
     
     .articles-grid {
+        grid-template-columns: 1fr;
         gap: 25px;
+        padding: 0 15px;
+        max-width: 500px;
+    }
+    
+    .articles-list-section .articles-mini-image {
+        height: 220px;
+    }
+    
+    .articles-list-section .articles-mini-title {
+        font-size: 16px;
+        padding: 16px 18px 20px;
+        min-height: 70px;
     }
     
     .cta-card {
@@ -219,7 +332,31 @@
     }
     
     .articles-grid {
+        grid-template-columns: 1fr;
         gap: 20px;
+        padding: 0 10px;
+    }
+    
+    .articles-list-section .articles-mini-card {
+        border-radius: 18px;
+    }
+    
+    .articles-list-section .articles-mini-image {
+        height: 200px;
+        border-radius: 18px 18px 0 0;
+    }
+    
+    .articles-list-section .articles-mini-image img {
+        width: 80%;
+        height: 80%;
+        padding: 12px;
+        border-radius: 14px;
+    }
+    
+    .articles-list-section .articles-mini-title {
+        font-size: 15px;
+        padding: 14px 16px 18px;
+        min-height: 65px;
     }
     
     .articles-cta {

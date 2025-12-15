@@ -11,6 +11,30 @@ export const metadata = {
 export default function ArticlesPage() {
   const articles = [
     {
+      id: 'calcium-gluconate-guide',
+      slug: 'calcium-gluconate-guide',
+      title: 'Кальция глюконат: полное руководство по применению, питанию и безопасности',
+      image: '/img/for _state5.png',
+    },
+    {
+      id: 'proline-guide',
+      slug: 'proline-guide',
+      title: 'Роль пролина в организме: почему эта аминокислота важна для здоровья',
+      image: '/img/for state_4.png',
+    },
+    {
+      id: 'valine-guide',
+      slug: 'valine-guide',
+      title: 'Валин: полный гид по применению для спортсменов 2025',
+      image: '/img/for state_3.png',
+    },
+    {
+      id: 'leucine-guide',
+      slug: 'leucine-guide',
+      title: 'Лейцин: влияние на синтез белка и метаболизм мышц',
+      image: '/img/leucine_st.png',
+    },
+    {
       id: 'threonine-guide',
       slug: 'threonine-guide',
       title: 'Что такое треонин? 7 важных фактов',
@@ -21,12 +45,6 @@ export default function ArticlesPage() {
       slug: 'isoleucine-guide',
       title: 'Изолейцин: энергия и восстановление',
       image: '/img/for state_2.png',
-    },
-    {
-      id: 'leucine-guide',
-      slug: 'leucine-guide',
-      title: 'Лейцин: влияние на синтез белка и метаболизм мышц',
-      image: '/img/leucine_st.png',
     },
   ];
 

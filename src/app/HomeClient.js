@@ -16,6 +16,27 @@ function ArticlesCarousel() {
   
   const articles = [
     {
+      id: 'calcium-gluconate',
+      href: '/articles/calcium-gluconate-guide',
+      image: '/img/for _state5.png',
+      title: 'Кальция глюконат: полное руководство по применению, питанию и безопасности',
+      ariaLabel: 'Кальция глюконат — перейти к статье'
+    },
+    {
+      id: 'proline',
+      href: '/articles/proline-guide',
+      image: '/img/for state_4.png',
+      title: 'Роль пролина в организме: почему эта аминокислота важна для здоровья',
+      ariaLabel: 'Пролин — перейти к статье'
+    },
+    {
+      id: 'valine',
+      href: '/articles/valine-guide',
+      image: '/img/for state_3.png',
+      title: 'Валин: полный гид по применению для спортсменов 2025',
+      ariaLabel: 'Валин — перейти к статье'
+    },
+    {
       id: 'leucine',
       href: '/articles/leucine-guide',
       image: '/img/leucine_st.png',

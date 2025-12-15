@@ -6,18 +6,7 @@
     overflow: hidden;
 }
 
-.reviews-section::before {
-    content: '';
-    position: absolute;
-    top: 10%;
-    right: -10%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(147,112,219,0.1) 0%, rgba(147,112,219,0) 70%);
-    border-radius: 50%;
-    z-index: 0;
-    animation: pulse 8s infinite alternate-reverse;
-}
+/* Декоративные круги убраны */
 
 .reviews-container {
     position: relative;

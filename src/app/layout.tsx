@@ -11,6 +11,7 @@ import './styles/components/buttons.css';
 import './styles/components/product-card.css';
 import './styles/components/image-modal.css';
 import './styles/components/review-card.css';
+import '../components/styles/free-delivery-modal.css';
 
 // Импорты страниц
 import './styles/pages/home.css';

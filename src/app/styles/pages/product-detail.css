@@ -7,31 +7,7 @@
     min-height: 100vh;
 }
 
-.product-detail-section::before {
-    content: '';
-    position: absolute;
-    top: 5%;
-    right: -10%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(147,112,219,0.15) 0%, rgba(147,112,219,0) 70%);
-    border-radius: 50%;
-    z-index: 0;
-    animation: pulse 8s infinite alternate;
-}
-
-.product-detail-section::after {
-    content: '';
-    position: absolute;
-    bottom: 5%;
-    left: -10%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(42,138,128,0.15) 0%, rgba(42,138,128,0) 70%);
-    border-radius: 50%;
-    z-index: 0;
-    animation: pulse 6s infinite alternate-reverse;
-}
+/* Декоративные круги убраны */
 
 .product-detail-container {
     display: flex;

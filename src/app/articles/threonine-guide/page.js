@@ -219,7 +219,19 @@ export default function ThreonineGuidePage() {
                   <h3>Популярные статьи</h3>
                   <ul className="sidebar-articles">
                     <li>
-                      <Link href="/articles/isoleucine-guide">L-изолейцин: энергия и восстановление</Link>
+                      <Link href="/articles/calcium-gluconate-guide">Кальция глюконат: полное руководство по применению, питанию и безопасности</Link>
+                    </li>
+                    <li>
+                      <Link href="/articles/proline-guide">Роль пролина в организме: почему эта аминокислота важна для здоровья</Link>
+                    </li>
+                    <li>
+                      <Link href="/articles/valine-guide">Валин: полный гид по применению для спортсменов 2025</Link>
+                    </li>
+                    <li>
+                      <Link href="/articles/leucine-guide">Лейцин: влияние на синтез белка и метаболизм мышц</Link>
+                    </li>
+                    <li>
+                      <Link href="/articles/isoleucine-guide">Изолейцин: энергия и восстановление</Link>
                     </li>
                   </ul>
                 </div>
@@ -227,8 +239,8 @@ export default function ThreonineGuidePage() {
                 <div className="sidebar-card">
                   <h3>Связанные продукты</h3>
                   <a href="/products/l-threonine" className="product-card product-card-clickable">
-                    <img src="/img/L-Threonine.png" alt="L-Threonine" />
-                    <h4>L-Threonine</h4>
+                    <img src="/img/L-Threonine.png" alt="Треонин" />
+                    <h4>Треонин</h4>
                     <p>Незаменимая аминокислота для здоровья кожи, суставов и иммунной системы</p>
                                          <button className="btn"><i className="fas fa-cart-plus"></i> Купить</button>
                   </a>

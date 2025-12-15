@@ -595,10 +595,19 @@ export default function LeucineGuidePage() {
                 <h3>Популярные статьи</h3>
                 <ul className="sidebar-articles">
                   <li>
-                    <Link href="/articles/threonine-guide">Что такое треонин? 7 важных фактов</Link>
+                    <Link href="/articles/calcium-gluconate-guide">Кальция глюконат: полное руководство по применению, питанию и безопасности</Link>
                   </li>
                   <li>
-                    <Link href="/articles/isoleucine-guide">L-изолейцин: энергия и восстановление</Link>
+                    <Link href="/articles/proline-guide">Роль пролина в организме: почему эта аминокислота важна для здоровья</Link>
+                  </li>
+                  <li>
+                    <Link href="/articles/valine-guide">Валин: полный гид по применению для спортсменов 2025</Link>
+                  </li>
+                  <li>
+                    <Link href="/articles/isoleucine-guide">Изолейцин: энергия и восстановление</Link>
+                  </li>
+                  <li>
+                    <Link href="/articles/threonine-guide">Что такое треонин? 7 важных фактов</Link>
                   </li>
                 </ul>
               </div>
@@ -606,8 +615,8 @@ export default function LeucineGuidePage() {
               <div className="sidebar-card">
                 <h3>Связанные продукты</h3>
                 <Link href="/products/l-leucine" className="product-card product-card-clickable">
-                  <img src="/img/L-Leucine.png" alt="L-Leucine" />
-                  <h4>L-Leucine</h4>
+                  <img src="/img/L-Leucine.png" alt="Лейцин" />
+                  <h4>Лейцин</h4>
                   <p>Незаменимая аминокислота для синтеза белка и мышечного роста</p>
                   <button className="btn"><i className="fas fa-cart-plus"></i> Купить</button>
                 </Link>

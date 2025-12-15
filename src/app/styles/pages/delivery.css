@@ -10,31 +10,7 @@
   overflow: hidden;
 }
 
-.delivery-page-hero::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -20%;
-  width: 800px;
-  height: 800px;
-  background: radial-gradient(circle, rgba(171,222,185,0.15) 0%, rgba(171,222,185,0) 70%);
-  border-radius: 50%;
-  z-index: 0;
-  animation: pulse 8s infinite alternate;
-}
-
-.delivery-page-hero::after {
-  content: '';
-  position: absolute;
-  bottom: -30%;
-  right: -10%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(42,138,128,0.15) 0%, rgba(42,138,128,0) 70%);
-  border-radius: 50%;
-  z-index: 0;
-  animation: pulse 6s infinite alternate-reverse;
-}
+/* Декоративные круги убраны */
 
 .delivery-page-hero .page-hero-content {
   position: relative;

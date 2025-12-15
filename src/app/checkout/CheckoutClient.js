@@ -313,6 +313,7 @@ const CheckoutClient = () => {
                         <i className="fas fa-truck"></i>
                         <div>
                           <strong>СДЭК</strong>
+                          <span style={{fontSize: '12px', color: 'var(--accent)', display: 'block', marginTop: '4px'}}>Бесплатно по всей России</span>
                         </div>
                       </div>
                     </label>
@@ -351,7 +352,7 @@ const CheckoutClient = () => {
                   </div>
                   
                   <p className="delivery-note">
-                    Точную стоимость доставки мы напишем Вам при обработке заказа, она зависит от города
+                    Доставка СДЭК по всей России — бесплатно. Стоимость доставки Почтой России рассчитывается при обработке заказа.
                   </p>
                 </div>
 

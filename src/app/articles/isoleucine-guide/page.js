@@ -236,6 +236,18 @@ export default function IsoleucineGuidePage() {
               <h3>Популярные статьи</h3>
               <ul className="sidebar-articles">
                 <li>
+                  <Link href="/articles/calcium-gluconate-guide">Кальция глюконат: полное руководство по применению, питанию и безопасности</Link>
+                </li>
+                <li>
+                  <Link href="/articles/proline-guide">Роль пролина в организме: почему эта аминокислота важна для здоровья</Link>
+                </li>
+                <li>
+                  <Link href="/articles/valine-guide">Валин: полный гид по применению для спортсменов 2025</Link>
+                </li>
+                <li>
+                  <Link href="/articles/leucine-guide">Лейцин: влияние на синтез белка и метаболизм мышц</Link>
+                </li>
+                <li>
                   <Link href="/articles/threonine-guide">Что такое треонин? 7 важных фактов</Link>
                 </li>
               </ul>
@@ -244,8 +256,8 @@ export default function IsoleucineGuidePage() {
             <div className="sidebar-card">
               <h3>Связанные продукты</h3>
               <Link href="/products/l-isoleucine" className="product-card product-card-clickable">
-                <img src="/img/L-Isoleucine.png" alt="L-Isoleucine" />
-                <h4>L-Isoleucine</h4>
+                <img src="/img/L-Isoleucine.png" alt="Изолейцин" />
+                <h4>Изолейцин</h4>
                 <p>Регулятор энергии и выносливости. Стабилизирует уровень сахара и поддерживает иммунитет!</p>
                                  <button className="btn"><i className="fas fa-cart-plus"></i> Купить</button>
               </Link>

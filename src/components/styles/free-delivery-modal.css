@@ -1,0 +1,207 @@
+/* ===== МОДАЛЬНОЕ ОКНО БЕСПЛАТНОЙ ДОСТАВКИ ===== */
+
+.free-delivery-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.free-delivery-modal {
+  background: linear-gradient(135deg, rgba(10, 14, 42, 0.98) 0%, rgba(26, 31, 74, 0.98) 100%);
+  border: 2px solid rgba(147, 112, 219, 0.4);
+  border-radius: 24px;
+  padding: 40px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+  animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.free-delivery-modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.free-delivery-modal-close:hover {
+  background: rgba(147, 112, 219, 0.3);
+  color: var(--accent);
+  transform: rotate(90deg);
+}
+
+.free-delivery-modal-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  background: linear-gradient(135deg, var(--accent) 0%, rgba(147, 112, 219, 0.8) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: white;
+  box-shadow: 0 10px 30px rgba(147, 112, 219, 0.4);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 10px 30px rgba(147, 112, 219, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(147, 112, 219, 0.6);
+  }
+}
+
+.free-delivery-modal-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 16px;
+  font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.free-delivery-modal-text {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.free-delivery-modal-text strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.free-delivery-modal-benefits {
+  background: rgba(26, 31, 74, 0.5);
+  border: 1px solid rgba(147, 112, 219, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+.free-delivery-benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+}
+
+.free-delivery-benefit-item:last-child {
+  margin-bottom: 0;
+}
+
+.free-delivery-benefit-item i {
+  color: var(--accent);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.free-delivery-modal-button {
+  width: 100%;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, var(--accent) 0%, rgba(147, 112, 219, 0.9) 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Montserrat Alternates', sans-serif;
+  box-shadow: 0 8px 20px rgba(147, 112, 219, 0.3);
+}
+
+.free-delivery-modal-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(147, 112, 219, 0.5);
+  background: linear-gradient(135deg, #4a9b94 0%, rgba(147, 112, 219, 1) 100%);
+}
+
+.free-delivery-modal-button:active {
+  transform: translateY(0);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .free-delivery-modal {
+    padding: 30px 20px;
+    max-width: 95%;
+  }
+
+  .free-delivery-modal-icon {
+    width: 70px;
+    height: 70px;
+    font-size: 30px;
+  }
+
+  .free-delivery-modal-title {
+    font-size: 24px;
+  }
+
+  .free-delivery-modal-text {
+    font-size: 16px;
+  }
+
+  .free-delivery-benefit-item {
+    font-size: 14px;
+  }
+
+  .free-delivery-modal-button {
+    font-size: 16px;
+    padding: 14px 24px;
+  }
+}
+

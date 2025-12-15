@@ -1,18 +1,79 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import products from "../../data/products";
 import ProductCard from "../../components/ProductCard";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useCart } from "../../contexts/CartContext";
 import AddToCartModal from "../../components/AddToCartModal";
+import FreeDeliveryModal from "../../components/FreeDeliveryModal";
 import "../styles/pages/products-mobile.css";
 
 export default function ProductsClient() {
   const { addToCart } = useCart();
   const [modalProduct, setModalProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFreeDeliveryModalOpen, setIsFreeDeliveryModalOpen] = useState(false);
+
+  useEffect(() => {
+    // Проверяем URL параметр для сброса флага (для тестирования)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('resetModal') === 'true') {
+      localStorage.removeItem('hasSeenFreeDeliveryModal');
+    }
+    
+    // Проверяем, показывали ли уже модальное окно о бесплатной доставке
+    // Теперь сохраняем timestamp и проверяем, прошло ли 30 минут
+    const modalData = localStorage.getItem('hasSeenFreeDeliveryModal');
+    const MODAL_COOLDOWN = 30 * 60 * 1000; // 30 минут в миллисекундах
+    
+    let shouldShowModal = false;
+    
+    if (!modalData) {
+      // Если данных нет, показываем модальное окно
+      shouldShowModal = true;
+    } else {
+      try {
+        // Пытаемся распарсить как JSON (новый формат с timestamp)
+        const data = JSON.parse(modalData);
+        if (data.timestamp) {
+          const timeSinceLastShow = Date.now() - data.timestamp;
+          // Если прошло больше 30 минут, показываем снова
+          if (timeSinceLastShow >= MODAL_COOLDOWN) {
+            shouldShowModal = true;
+          }
+        } else {
+          // Старый формат (просто 'true'), показываем модальное окно
+          shouldShowModal = true;
+        }
+      } catch (e) {
+        // Если это старый формат (просто строка 'true'), показываем модальное окно
+        if (modalData === 'true') {
+          shouldShowModal = true;
+        }
+      }
+    }
+    
+    if (shouldShowModal) {
+      // Показываем модальное окно через небольшую задержку для лучшего UX
+      const timer = setTimeout(() => {
+        setIsFreeDeliveryModalOpen(true);
+      }, 1000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  const handleCloseFreeDeliveryModal = () => {
+    setIsFreeDeliveryModalOpen(false);
+    // Сохраняем в localStorage timestamp текущего времени
+    // Это позволит показывать модальное окно снова через 30 минут
+    const modalData = {
+      timestamp: Date.now()
+    };
+    localStorage.setItem('hasSeenFreeDeliveryModal', JSON.stringify(modalData));
+  };
 
   return (
     <>
@@ -65,6 +126,11 @@ export default function ProductsClient() {
           if (modalProduct) addToCart(modalProduct);
           window.location.href = '/checkout';
         }}
+      />
+
+      <FreeDeliveryModal
+        isOpen={isFreeDeliveryModalOpen}
+        onClose={handleCloseFreeDeliveryModal}
       />
     </>
   );
