@@ -14,37 +14,37 @@ export default function ArticlesPage() {
       id: 'calcium-gluconate-guide',
       slug: 'calcium-gluconate-guide',
       title: 'Кальция глюконат: полное руководство по применению, питанию и безопасности',
-      image: '/img/for _state5.png',
+      image: '/img/articles_img/calcium-gluconate.webp',
     },
     {
       id: 'proline-guide',
       slug: 'proline-guide',
       title: 'Роль пролина в организме: почему эта аминокислота важна для здоровья',
-      image: '/img/for state_4.png',
+      image: '/img/articles_img/proline.webp',
     },
     {
       id: 'valine-guide',
       slug: 'valine-guide',
       title: 'Валин: полный гид по применению для спортсменов 2025',
-      image: '/img/for state_3.png',
+      image: '/img/articles_img/valine.webp',
     },
     {
       id: 'leucine-guide',
       slug: 'leucine-guide',
       title: 'Лейцин: влияние на синтез белка и метаболизм мышц',
-      image: '/img/leucine_st.png',
+      image: '/img/articles_img/leucine.webp',
     },
     {
       id: 'threonine-guide',
       slug: 'threonine-guide',
       title: 'Что такое треонин? 7 важных фактов',
-      image: '/img/for state_1.png',
+      image: '/img/articles_img/threonine.webp',
     },
     {
       id: 'isoleucine-guide',
       slug: 'isoleucine-guide',
       title: 'Изолейцин: энергия и восстановление',
-      image: '/img/for state_2.png',
+      image: '/img/articles_img/isoleucine.webp',
     },
   ];
 

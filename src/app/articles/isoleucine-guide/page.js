@@ -11,7 +11,7 @@ export const metadata = {
     title: 'Изолейцин: полное руководство | BioMorphX',
     description: 'Научное руководство по изолейцину: польза, дозировки, применение для спортсменов',
     type: 'article',
-    images: ['/img/for state_2.png'],
+    images: ['/img/articles_img/isoleucine.webp'],
   },
   alternates: {
     canonical: '/articles/isoleucine-guide',

@@ -190,7 +190,7 @@ export default function ContactClient() {
             <p style={{color: 'rgba(255, 255, 255, 0.8)', lineHeight: '1.8', fontSize: '16px', marginBottom: '15px'}}>
               ИП Скаромный Владислав Андреевич<br/>
               ИНН 251009076204<br/>
-              Email: vladskaromnyy@gmail.com
+              Email: biomorphx@proton.me
             </p>
           </div>
         </div>

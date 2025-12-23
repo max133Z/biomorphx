@@ -98,8 +98,8 @@ SMTP_SECURE=true
 SMTP_USER=ваш_email@yandex.ru
 SMTP_PASS=ваш_пароль_приложения
 SMTP_FROM=ваш_email@yandex.ru
-ORDER_EMAIL_TO=vladskaromnyy@gmail.com
-CONTACT_EMAIL_TO=vladskaromnyy@gmail.com
+ORDER_EMAIL_TO=biomorphx@proton.me
+CONTACT_EMAIL_TO=biomorphx@proton.me
 
 # Админ-панель (ОБЯЗАТЕЛЬНО ИЗМЕНИТЕ!)
 ADMIN_USER=admin
@@ -391,7 +391,7 @@ htop
 1. **Проверьте логи:** `pm2 logs biomorphx`
 2. **Откатитесь к backup:** `sudo cp -r /var/www/biomorphx_backup_ДАТА /var/www/biomorphx`
 3. **Восстановите БД:** `mysql -u user -p biomorphx < ~/biomorphx_backup_ДАТА.sql`
-4. **Обратитесь за помощью:** vladskaromnyy@gmail.com
+4. **Обратитесь за помощью:** biomorphx@proton.me
 
 ---
 

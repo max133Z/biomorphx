@@ -41,57 +41,69 @@ export default function WhatsAppWidget() {
     setIsWidgetOpen(true);
   };
 
+  const handleTelegramClick = () => {
+    window.open('https://t.me/biomorphx', '_blank');
+  };
+
   if (!isVisible) return null;
 
   return (
     <>
       {/* Десктопная версия */}
-      {isWidgetOpen ? (
-        <div className="whatsapp-widget-desktop">
-          <div className="whatsapp-widget-content">
-            <div className="whatsapp-widget-header">
-              <div className="whatsapp-widget-avatar">
-                <i className="fab fa-whatsapp"></i>
+      <div className="whatsapp-widget-icon-desktop">
+        <div className="social-widgets-group">
+          <button onClick={handleTelegramClick} className="telegram-widget-icon-button" title="Telegram канал">
+            <i className="fab fa-telegram"></i>
+          </button>
+          {isWidgetOpen ? (
+            <div className="whatsapp-widget-desktop">
+              <div className="whatsapp-widget-content">
+                <div className="whatsapp-widget-header">
+                  <div className="whatsapp-widget-avatar">
+                    <i className="fab fa-whatsapp"></i>
+                  </div>
+                  <div className="whatsapp-widget-info">
+                    <h4>BioMorphX</h4>
+                    <p>Онлайн консультация</p>
+                  </div>
+                  <button onClick={handleClose} className="whatsapp-widget-close">
+                    <i className="fas fa-times"></i>
+                  </button>
+                </div>
+                <div className="whatsapp-widget-message">
+                  <p>Добрый день, пишите - проконсультирую</p>
+                </div>
+                <button onClick={handleWhatsAppClick} className="whatsapp-widget-button">
+                  <i className="fab fa-whatsapp"></i>
+                  Написать в WhatsApp
+                </button>
               </div>
-              <div className="whatsapp-widget-info">
-                <h4>BioMorphX</h4>
-                <p>Онлайн консультация</p>
-              </div>
-              <button onClick={handleClose} className="whatsapp-widget-close">
-                <i className="fas fa-times"></i>
-              </button>
             </div>
-            <div className="whatsapp-widget-message">
-              <p>Добрый день, пишите - проконсультирую</p>
-            </div>
-            <button onClick={handleWhatsAppClick} className="whatsapp-widget-button">
+          ) : (
+            <button onClick={handleIconClick} className="whatsapp-widget-icon-button" title="WhatsApp">
               <i className="fab fa-whatsapp"></i>
-              Написать в WhatsApp
             </button>
-          </div>
+          )}
         </div>
-      ) : (
-        <div className="whatsapp-widget-icon-desktop">
-          <button onClick={handleIconClick} className="whatsapp-widget-icon-button">
+      </div>
+
+      {/* Мобильная версия - только иконки */}
+      <div className="whatsapp-widget-mobile">
+        <div className="social-widgets-group-mobile">
+          <button onClick={handleTelegramClick} className="telegram-widget-mobile-button" title="Telegram канал">
+            <i className="fab fa-telegram"></i>
+          </button>
+          <button onClick={handleWhatsAppClick} className="whatsapp-widget-mobile-button" title="WhatsApp">
             <i className="fab fa-whatsapp"></i>
           </button>
         </div>
-      )}
-
-      {/* Мобильная версия - только иконка */}
-      <div className="whatsapp-widget-mobile">
-        <button onClick={handleWhatsAppClick} className="whatsapp-widget-mobile-button">
-          <i className="fab fa-whatsapp"></i>
-        </button>
       </div>
 
       <style jsx>{`
         .whatsapp-widget-desktop {
-          position: fixed;
-          bottom: 20px;
-          right: 20px;
-          z-index: 1000;
+          position: relative;
           animation: slideIn 0.3s ease-out;
+          margin-top: 12px;
         }
 
         .whatsapp-widget-content {
@@ -193,10 +205,17 @@ export default function WhatsAppWidget() {
           display: none;
         }
 
-        .whatsapp-widget-mobile-button {
+        .social-widgets-group-mobile {
           position: fixed;
           bottom: 20px;
           right: 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          z-index: 1000;
+        }
+
+        .whatsapp-widget-mobile-button {
           width: 50px;
           height: 50px;
           background: #25d366;
@@ -205,7 +224,6 @@ export default function WhatsAppWidget() {
           border-radius: 50%;
           font-size: 20px;
           cursor: pointer;
-          z-index: 1000;
           box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
           transition: all 0.3s ease;
           display: flex;
@@ -217,6 +235,28 @@ export default function WhatsAppWidget() {
           background: #128c7e;
           transform: scale(1.1);
           box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .telegram-widget-mobile-button {
+          width: 50px;
+          height: 50px;
+          background: #0088cc;
+          color: white;
+          border: none;
+          border-radius: 50%;
+          font-size: 20px;
+          cursor: pointer;
+          box-shadow: 0 5px 15px rgba(0, 136, 204, 0.3);
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .telegram-widget-mobile-button:hover {
+          background: #006ba3;
+          transform: scale(1.1);
+          box-shadow: 0 8px 20px rgba(0, 136, 204, 0.4);
         }
 
         @keyframes slideIn {
@@ -235,6 +275,13 @@ export default function WhatsAppWidget() {
           bottom: 20px;
           right: 20px;
           z-index: 1000;
+        }
+
+        .social-widgets-group {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          align-items: flex-end;
         }
 
         .whatsapp-widget-icon-button {
@@ -257,6 +304,28 @@ export default function WhatsAppWidget() {
           background: #128c7e;
           transform: scale(1.1);
           box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+        }
+
+        .telegram-widget-icon-button {
+          width: 60px;
+          height: 60px;
+          background: #0088cc;
+          color: white;
+          border: none;
+          border-radius: 50%;
+          font-size: 24px;
+          cursor: pointer;
+          box-shadow: 0 5px 15px rgba(0, 136, 204, 0.3);
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .telegram-widget-icon-button:hover {
+          background: #006ba3;
+          transform: scale(1.1);
+          box-shadow: 0 8px 20px rgba(0, 136, 204, 0.4);
         }
 
         @media (max-width: 768px) {

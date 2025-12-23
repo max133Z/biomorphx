@@ -19,7 +19,7 @@ export default function ProductsClient() {
   useEffect(() => {
     // Проверяем URL параметр для сброса флага (для тестирования)
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('resetModal') === 'true') {
+    if (urlParams.get('resetModal') === 'true' || urlParams.get('resetFreeDelivery') === 'true') {
       localStorage.removeItem('hasSeenFreeDeliveryModal');
     }
     

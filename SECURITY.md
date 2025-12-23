@@ -213,8 +213,8 @@ SMTP_SECURE=true
 SMTP_USER=ваш_email@yandex.ru
 SMTP_PASS=ваш_пароль_приложения
 SMTP_FROM=ваш_email@yandex.ru
-ORDER_EMAIL_TO=vladskaromnyy@gmail.com
-CONTACT_EMAIL_TO=vladskaromnyy@gmail.com
+ORDER_EMAIL_TO=biomorphx@proton.me
+CONTACT_EMAIL_TO=biomorphx@proton.me
 
 # Админ-панель
 ADMIN_USER=admin
@@ -475,7 +475,7 @@ npm outdated
 
 Если вы обнаружили уязвимость в безопасности, пожалуйста, сообщите об этом:
 
-**Email:** vladskaromnyy@gmail.com  
+**Email:** biomorphx@proton.me  
 **Telegram:** @biomorphx
 
 **⚠️ Не публикуйте информацию об уязвимостях публично до их исправления!**

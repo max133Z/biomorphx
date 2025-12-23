@@ -1,14 +1,62 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import Header from "../../../components/Header";
 import Footer from "../../../components/Footer";
 import ImageModal from "../../../components/ImageModal";
+import AddToCartModal from "../../../components/AddToCartModal";
 import { useCart } from "../../../contexts/CartContext";
+
+// Маппинг продуктов к статьям
+const getRelatedArticle = (productId) => {
+  const articleMap = {
+    "l-threonine": {
+      slug: "threonine-guide",
+      title: "Что такое треонин? 7 важных фактов",
+      image: "/img/articles_img/threonine.webp",
+    },
+    "l-proline": {
+      slug: "proline-guide",
+      title: "Роль пролина в организме: почему эта аминокислота важна для здоровья",
+      image: "/img/articles_img/proline.webp",
+    },
+    "l-valine": {
+      slug: "valine-guide",
+      title: "Валин: полный гид по применению для спортсменов 2025",
+      image: "/img/articles_img/valine.webp",
+    },
+    "l-leucine": {
+      slug: "leucine-guide",
+      title: "Лейцин: влияние на синтез белка и метаболизм мышц",
+      image: "/img/articles_img/leucine.webp",
+    },
+    "l-isoleucine": {
+      slug: "isoleucine-guide",
+      title: "Изолейцин: энергия и восстановление",
+      image: "/img/articles_img/isoleucine.webp",
+    },
+    "calcium-d-gluconate": {
+      slug: "calcium-gluconate-guide",
+      title: "Кальция глюконат: полное руководство по применению, питанию и безопасности",
+      image: "/img/articles_img/calcium-gluconate.webp",
+    },
+  };
+  
+  return articleMap[productId] || null;
+};
 
 export default function ProductDetailClient({ product }) {
   const { addToCart } = useCart();
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const [isAddToCartModalOpen, setIsAddToCartModalOpen] = useState(false);
+  const relatedArticle = product ? getRelatedArticle(product.id) : null;
+
+  const handleAddToCart = () => {
+    if (product) {
+      setIsAddToCartModalOpen(true);
+    }
+  };
 
   if (!product) {
     return (
@@ -89,13 +137,37 @@ export default function ProductDetailClient({ product }) {
             </div>
 
             <div className="add-to-cart">
-              <button className="btn" onClick={() => addToCart(product)}>
+              <button className="btn" onClick={handleAddToCart}>
                 <i className="fas fa-cart-plus"></i> Добавить в корзину
               </button>
             </div>
           </div>
         </div>
       </section>
+
+      {relatedArticle && (
+        <section className="product-related-article">
+          <div className="container">
+            <div className="related-article-card">
+              <div className="related-article-content">
+                <h2>Полезная статья</h2>
+                <p>Узнайте больше о применении и пользе этого продукта</p>
+                <Link href={`/articles/${relatedArticle.slug}`} className="related-article-link">
+                  <div className="related-article-image">
+                    <img src={relatedArticle.image} alt={relatedArticle.title} />
+                  </div>
+                  <div className="related-article-info">
+                    <h3>{relatedArticle.title}</h3>
+                    <span className="related-article-read-more">
+                      Читать статью <i className="fas fa-arrow-right"></i>
+                    </span>
+                  </div>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       <Footer />
       
@@ -104,6 +176,21 @@ export default function ProductDetailClient({ product }) {
         imageSrc={product.image}
         imageAlt={product.name}
         onClose={() => setIsImageModalOpen(false)}
+      />
+
+      <AddToCartModal
+        isOpen={isAddToCartModalOpen}
+        product={product}
+        onClose={() => setIsAddToCartModalOpen(false)}
+        onContinue={() => {
+          if (product) addToCart(product);
+          setIsAddToCartModalOpen(false);
+        }}
+        onCheckout={() => {
+          if (product) addToCart(product);
+          setIsAddToCartModalOpen(false);
+          window.location.href = '/checkout';
+        }}
       />
     </>
   );

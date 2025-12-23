@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import products from "../data/products";
 import reviews from "../data/reviews";
 import ProductCard from "../components/ProductCard";
@@ -9,6 +10,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useCart } from "../contexts/CartContext";
 import WhatsAppWidget from "../components/WhatsAppWidget";
+import PromoCodeModal from "../components/PromoCodeModal";
 import "./styles/pages/home-mobile.css";
 
 function ArticlesCarousel() {
@@ -18,42 +20,42 @@ function ArticlesCarousel() {
     {
       id: 'calcium-gluconate',
       href: '/articles/calcium-gluconate-guide',
-      image: '/img/for _state5.png',
+      image: '/img/articles_img/calcium-gluconate.webp',
       title: 'Кальция глюконат: полное руководство по применению, питанию и безопасности',
       ariaLabel: 'Кальция глюконат — перейти к статье'
     },
     {
       id: 'proline',
       href: '/articles/proline-guide',
-      image: '/img/for state_4.png',
+      image: '/img/articles_img/proline.webp',
       title: 'Роль пролина в организме: почему эта аминокислота важна для здоровья',
       ariaLabel: 'Пролин — перейти к статье'
     },
     {
       id: 'valine',
       href: '/articles/valine-guide',
-      image: '/img/for state_3.png',
+      image: '/img/articles_img/valine.webp',
       title: 'Валин: полный гид по применению для спортсменов 2025',
       ariaLabel: 'Валин — перейти к статье'
     },
     {
       id: 'leucine',
       href: '/articles/leucine-guide',
-      image: '/img/leucine_st.png',
+      image: '/img/articles_img/leucine.webp',
       title: 'Лейцин: влияние на синтез белка и метаболизм мышц',
       ariaLabel: 'Лейцин — перейти к статье'
     },
     {
       id: 'threonine',
       href: '/articles/threonine-guide',
-      image: '/img/for state_1.png',
+      image: '/img/articles_img/threonine.webp',
       title: 'Что такое треонин? 7 важных фактов',
       ariaLabel: 'Треонин — перейти к статье'
     },
     {
       id: 'isoleucine',
       href: '/articles/isoleucine-guide',
-      image: '/img/for state_2.png',
+      image: '/img/articles_img/isoleucine.webp',
       title: 'Изолейцин: энергия и восстановление',
       ariaLabel: 'Изолейцин — перейти к статье'
     }
@@ -176,6 +178,64 @@ function ArticlesCarousel() {
 
 export default function HomeClient() {
   const { addToCart } = useCart();
+  const [isPromoCodeModalOpen, setIsPromoCodeModalOpen] = useState(false);
+
+  useEffect(() => {
+    // Проверяем URL параметр для сброса флага (для тестирования)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('resetPromoModal') === 'true') {
+      localStorage.removeItem('hasSeenPromoCodeModal');
+    }
+    
+    // Проверяем, показывали ли уже модальное окно промокода
+    const promoModalData = localStorage.getItem('hasSeenPromoCodeModal');
+    
+    let shouldShowModal = false;
+    
+    if (!promoModalData) {
+      // Если данных нет, показываем модальное окно
+      shouldShowModal = true;
+    } else {
+      try {
+        // Пытаемся распарсить как JSON (новый формат с timestamp)
+        const data = JSON.parse(promoModalData);
+        if (data.timestamp) {
+          const timeSinceLastShow = Date.now() - data.timestamp;
+          const MODAL_COOLDOWN = 24 * 60 * 60 * 1000; // 24 часа в миллисекундах
+          // Если прошло больше 24 часов, показываем снова
+          if (timeSinceLastShow >= MODAL_COOLDOWN) {
+            shouldShowModal = true;
+          }
+        } else {
+          // Старый формат, показываем модальное окно
+          shouldShowModal = true;
+        }
+      } catch (e) {
+        // Если это старый формат (просто строка 'true'), не показываем
+        if (promoModalData !== 'true') {
+          shouldShowModal = true;
+        }
+      }
+    }
+    
+    if (shouldShowModal) {
+      // Показываем модальное окно через 5 секунд после загрузки страницы
+      const timer = setTimeout(() => {
+        setIsPromoCodeModalOpen(true);
+      }, 5000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  const handleClosePromoCodeModal = () => {
+    setIsPromoCodeModalOpen(false);
+    // Сохраняем в localStorage timestamp текущего времени
+    const modalData = {
+      timestamp: Date.now()
+    };
+    localStorage.setItem('hasSeenPromoCodeModal', JSON.stringify(modalData));
+  };
 
   return (
     <>
@@ -192,7 +252,7 @@ export default function HomeClient() {
               </div>
             </div>
             <div className="hero-image">
-              <img src="/img/image_1.jpg" alt="hero image"/>
+              <img src="/img/new.png" alt="hero image"/>
             </div>
           </div>
         </div>
@@ -268,15 +328,22 @@ export default function HomeClient() {
               <p>Реальные отзывы от людей, которые уже попробовали наши продукты и получили результаты</p>
             </div>
             <div className="reviews-grid">
-              {reviews.map(review => (
+              {reviews.slice(0, 3).map(review => (
                 <ReviewCard key={review.id} review={review} />
               ))}
+            </div>
+            <div style={{textAlign: 'center', marginTop: '40px'}}>
+              <Link href="/reviews" className="btn btn-outline">Все отзывы</Link>
             </div>
           </div>
         </div>
       </section>
 
       <WhatsAppWidget />
+      <PromoCodeModal 
+        isOpen={isPromoCodeModalOpen}
+        onClose={handleClosePromoCodeModal}
+      />
       <Footer />
     </>
   );

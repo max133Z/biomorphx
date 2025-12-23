@@ -11,7 +11,7 @@ export const metadata = {
     title: 'Роль пролина в организме: почему эта аминокислота важна для здоровья | BioMorphX',
     description: 'Откройте удивительные свойства пролина - аминокислоты, которая влияет на всё: от развития эмбриона до борьбы с раком. Простым языком о сложных процессах.',
     type: 'article',
-    images: ['/img/for state_4.png'],
+    images: ['/img/articles_img/proline.webp'],
   },
   alternates: {
     canonical: '/articles/proline-guide',
@@ -120,7 +120,7 @@ export default function ProlineGuidePage() {
                       "name": "BioMorphX"
                     },
                     "datePublished": "2025-01-25",
-                    "image": "/img/for state_4.png"
+                    "image": "/img/articles_img/proline.webp"
                   })
                 }}
               />

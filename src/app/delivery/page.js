@@ -107,7 +107,7 @@ export default function Delivery() {
             </p>
             <p style={{color: 'var(--accent)', fontWeight: 600}}>
               Телефон: +7 904 638 94 16<br/>
-              Email: vladskaromnyy@gmail.com<br/>
+              Email: biomorphx@proton.me<br/>
               Telegram: @craftlabworker<br/>
               WhatsApp: +7 904 638 94 16
             </p>

@@ -11,7 +11,7 @@ export const metadata = {
     title: 'Лейцин: влияние на синтез белка и метаболизм мышц | BioMorphX',
     description: 'Механизмы действия лейцина: активация mTOR пути, влияние на синтез белка и мышечный рост',
     type: 'article',
-    images: ['/img/L-Leucine.png'],
+    images: ['/img/articles_img/leucine.webp'],
   },
   alternates: {
     canonical: '/articles/leucine-guide',
@@ -121,7 +121,7 @@ export default function LeucineGuidePage() {
                       "name": "BioMorphX"
                     },
                     "datePublished": "2024-11-20",
-                    "image": "/img/L-Leucine.png"
+                    "image": "/img/articles_img/leucine.webp"
                   })
                 }}
               />

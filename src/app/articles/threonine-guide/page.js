@@ -11,7 +11,7 @@ export const metadata = {
     title: 'Что такое треонин? 7 важных фактов — BioMorphX',
     description: '7 важных фактов о L-треонине, которые нужно знать каждому',
     type: 'article',
-    images: ['/img/for state_1.png'],
+    images: ['/img/articles_img/threonine.webp'],
   },
   alternates: {
     canonical: '/articles/threonine-guide',

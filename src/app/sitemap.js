@@ -84,6 +84,12 @@ export default function sitemap() {
       priority: 0.5,
     },
     {
+      url: `${baseUrl}/reviews`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
+    {
       url: `${baseUrl}/privacy-policy`,
       lastModified: new Date(),
       changeFrequency: 'yearly',

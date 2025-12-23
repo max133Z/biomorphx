@@ -30,10 +30,19 @@ export default function ExternalResources() {
 
     return () => {
       // Очистка при размонтировании
-      document.head.removeChild(fontAwesomeLink);
-      document.head.removeChild(preconnectGoogle);
-      document.head.removeChild(preconnectGstatic);
-      document.head.removeChild(montserratLink);
+      // Проверяем, что элемент существует и является дочерним элементом перед удалением
+      if (fontAwesomeLink && fontAwesomeLink.parentNode === document.head) {
+        document.head.removeChild(fontAwesomeLink);
+      }
+      if (preconnectGoogle && preconnectGoogle.parentNode === document.head) {
+        document.head.removeChild(preconnectGoogle);
+      }
+      if (preconnectGstatic && preconnectGstatic.parentNode === document.head) {
+        document.head.removeChild(preconnectGstatic);
+      }
+      if (montserratLink && montserratLink.parentNode === document.head) {
+        document.head.removeChild(montserratLink);
+      }
     };
   }, []);
 

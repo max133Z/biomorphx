@@ -11,7 +11,7 @@ export const metadata = {
     title: 'Валин: полный гид по применению для спортсменов на основе новых исследований 2025 | BioMorphX',
     description: 'Откройте все функции валина для роста мышц и энергии. Подробные схемы приема для силовых, игровых и циклических видов спорта.',
     type: 'article',
-    images: ['/img/for state_3.png'],
+    images: ['/img/articles_img/valine.webp'],
   },
   alternates: {
     canonical: '/articles/valine-guide',
@@ -123,7 +123,7 @@ export default function ValineGuidePage() {
                     },
                     "datePublished": "2025-01-25",
                     "dateModified": "2025-01-25",
-                    "image": "/img/for state_3.png",
+                    "image": "/img/articles_img/valine.webp",
                     "mainEntityOfPage": {
                       "@type": "WebPage",
                       "@id": "https://biomorphx.ru/articles/valine-guide"

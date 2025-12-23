@@ -1,4 +1,20 @@
+"use client";
+
 import React from 'react';
+import Link from 'next/link';
+
+// Маппинг названий продуктов из отзывов на их ID
+const getProductId = (productName) => {
+  const productMap = {
+    "L-Valine (L-Валин)": "l-valine",
+    "L-Cysteine (L-Цистеин)": "l-cysteine",
+    "L-Threonine (L-Треонин)": "l-threonine",
+    "Calcium D-Gluconate (Кальция глюконат)": "calcium-d-gluconate",
+    "L-Leucine (L-Лейцин)": "l-leucine",
+  };
+  
+  return productMap[productName] || null;
+};
 
 const ReviewCard = ({ review }) => {
   const renderStars = (rating) => {
@@ -34,15 +50,41 @@ const ReviewCard = ({ review }) => {
       <div className="review-header">
         <div className="reviewer-info">
           <div className="reviewer-avatar">
-            <div className="avatar-icon">
-              <AvatarIcon />
-            </div>
+            {review.avatar ? (
+              <>
+                <img 
+                  src={review.avatar} 
+                  alt={review.name}
+                  className="avatar-image"
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    const iconElement = e.target.nextElementSibling;
+                    if (iconElement) {
+                      iconElement.style.display = 'flex';
+                    }
+                  }}
+                />
+                <div className="avatar-icon" style={{ display: 'none' }}>
+                  <AvatarIcon />
+                </div>
+              </>
+            ) : (
+              <div className="avatar-icon">
+                <AvatarIcon />
+              </div>
+            )}
           </div>
           <div className="reviewer-details">
             <h4 className="reviewer-name">{review.name}</h4>
             <div className="review-product">
               <span className="product-label">о продукте:</span>
-              <span className="product-name">{review.product}</span>
+              {getProductId(review.product) ? (
+                <Link href={`/products/${getProductId(review.product)}`} className="product-name product-name-link">
+                  {review.product}
+                </Link>
+              ) : (
+                <span className="product-name">{review.product}</span>
+              )}
             </div>
             <div className="review-stars">
               {renderStars(review.rating)}

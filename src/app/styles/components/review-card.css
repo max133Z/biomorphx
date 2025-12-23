@@ -77,6 +77,23 @@
 
 .reviewer-avatar {
     flex-shrink: 0;
+    position: relative;
+}
+
+.avatar-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(147, 112, 219, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+}
+
+.review-card:hover .avatar-image {
+    border-color: var(--accent);
+    box-shadow: 0 4px 12px rgba(147, 112, 219, 0.4);
+    transform: scale(1.05);
 }
 
 .avatar-icon {
@@ -141,6 +158,20 @@
     border: 1px solid rgba(147, 112, 219, 0.2);
 }
 
+.product-name-link {
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-block;
+}
+
+.product-name-link:hover {
+    background: rgba(147, 112, 219, 0.2);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(147, 112, 219, 0.3);
+}
+
 .review-stars {
     display: flex;
     gap: 5px;
@@ -195,6 +226,11 @@
         gap: 12px;
     }
     
+    .avatar-image {
+        width: 45px;
+        height: 45px;
+    }
+    
     .avatar-icon {
         width: 45px;
         height: 45px;
@@ -238,6 +274,11 @@
     
     .reviewer-info {
         gap: 10px;
+    }
+    
+    .avatar-image {
+        width: 40px;
+        height: 40px;
     }
     
     .avatar-icon {

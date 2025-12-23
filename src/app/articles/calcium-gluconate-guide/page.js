@@ -11,7 +11,7 @@ export const metadata = {
     title: 'Кальция глюконат: полное руководство по применению, питанию и безопасности | BioMorphX',
     description: 'Полная информация о кальция глюконате: показания по FDA, дозировки, продукты с кальцием и важные противопоказания. Узнайте разницу между лечением и профилактикой.',
     type: 'article',
-    images: ['/img/for _state5.png'],
+    images: ['/img/articles_img/calcium-gluconate.webp'],
   },
   alternates: {
     canonical: '/articles/calcium-gluconate-guide',
@@ -118,7 +118,7 @@ export default function CalciumGluconateGuidePage() {
                       "name": "BioMorphX"
                     },
                     "datePublished": "2025-01-25",
-                    "image": "/img/for _state5.png"
+                    "image": "/img/articles_img/calcium-gluconate.webp"
                   })
                 }}
               />
